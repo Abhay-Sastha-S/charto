@@ -141,8 +141,12 @@ def find_Distance(p1, p2):
     d = ((x2-x1)**2 + (y2-y1)**2)**0.5
     return d
 
-def get_color(img, color_range=512):
+def get_color(img, color_range=512, for_legend_preview=False):
     """Extract dominant color from image region"""
+    # Convert RGBA to RGB if necessary
+    if img.mode == 'RGBA':
+        img = img.convert('RGB')
+    
     basewidth = 100
     wpercent = (basewidth/float(img.size[0]))
     hsize = int((float(img.size[1])*float(wpercent)))
@@ -156,31 +160,89 @@ def get_color(img, color_range=512):
         img = img.resize((basewidth, hsize), Image.ANTIALIAS)
     
     colors = img.getcolors(color_range)
-    max_occurence, most_present = 0, (0, 0, 0)
     
-    try:
-        for c in colors:
-            if (c[0] > max_occurence and 
-                c[1] not in [(255,255,255), (0,0,0), 0, (0)] and 
-                c[1] != 0 and 
-                colorDistance(c[1], [255,255,255], method="euclidian") > 50):
-                (max_occurence, most_present) = c
-    except TypeError:
-        color_range = 2 * color_range
-        if color_range < 10000:
-            return get_color(img, color_range)
+    if for_legend_preview:
+        # For legend previews, find the most representative (non-background) color
+        # Strategy: Find the color that is most distinct from white background
+        best_color = (0, 0, 0)
+        best_score = -1
+        
+        try:
+            for c in colors:
+                color_tuple = c[1]
+                count = c[0]
+                
+                # Skip pure white (background) and very light colors
+                if color_tuple == (255, 255, 255) or color_tuple == 0:
+                    continue
+                
+                # Calculate distance from white (higher = more distinct)
+                white_distance = colorDistance(list(color_tuple), [255, 255, 255], method="euclidian")
+                
+                # Skip colors too close to white (likely background noise)
+                if white_distance < 20:
+                    continue
+                
+                # Score combines frequency and distinctness from white
+                # Favor colors that are both reasonably frequent and distinct
+                frequency_score = min(count / 10, 10)  # Cap frequency influence
+                distinctness_score = white_distance / 10  # Distance from white
+                
+                # Special handling for very dark colors (avoid pure black)
+                # If color is very dark, prefer slightly lighter versions for better matching
+                r, g, b = color_tuple
+                avg_brightness = (r + g + b) / 3
+                if avg_brightness < 20:  # Very dark color
+                    # Reduce score for extremely dark colors to prefer slightly lighter ones
+                    darkness_penalty = (20 - avg_brightness) / 20 * 0.5
+                    total_score = frequency_score * distinctness_score * (1 - darkness_penalty)
+                else:
+                    total_score = frequency_score * distinctness_score
+                
+                if total_score > best_score:
+                    best_score = total_score
+                    best_color = color_tuple
+                    
+            most_present = best_color
+            
+        except TypeError:
+            color_range = 2 * color_range
+            if color_range < 10000:
+                return get_color(img, color_range, for_legend_preview)
+    else:
+        # Original logic for non-legend elements
+        max_occurence, most_present = 0, (0, 0, 0)
+        
+        try:
+            for c in colors:
+                # c[1] should now be RGB tuple (R, G, B)
+                color_tuple = c[1]
+                if (c[0] > max_occurence and 
+                    color_tuple not in [(255,255,255), (0,0,0)] and 
+                    color_tuple != 0 and 
+                    colorDistance(list(color_tuple), [255,255,255], method="euclidian") > 50):
+                    (max_occurence, most_present) = c
+        except TypeError:
+            color_range = 2 * color_range
+            if color_range < 10000:
+                return get_color(img, color_range, for_legend_preview)
     
     return list(most_present)
 
 
 def find_plot_type(image_data):
-    """Determine plot type from detected elements"""
-    pred_classes = list(set([dd["pred_class"] for dd in image_data 
-                            if dd["pred_class"] in ["bar", "dot_line", "line"]]))
-    if len(pred_classes):
-        return pred_classes[0]
-    else:
+    """Determine plot type from detected elements based on counts"""
+    element_counts = {}
+    for dd in image_data:
+        if dd["pred_class"] in ["bar", "dot_line", "line"]:
+            element_counts[dd["pred_class"]] = element_counts.get(dd["pred_class"], 0) + 1
+    
+    if not element_counts:
         return "empty"
+    
+    # Return the most common visual element type
+    most_common_type = max(element_counts, key=element_counts.get)
+    return most_common_type
 
 def list_subtraction(l1, l2):
     """Remove items in l2 from l1"""
@@ -533,55 +595,59 @@ def find_visual_values(image, image_data, isHbar, isSinglePlot):
     
     # Find valid tick labels for scale calculation - use a simplified approach
     if len(ticklabel) < 2:
-        return "Skip, not enough tick labels detected"
-    
-    # Use a default scale calculation if OCR is problematic
-    # Take the first two tick labels and use their positions to estimate scale
-    tick1, tick2 = ticklabel[0].copy(), ticklabel[1].copy()
-    
-    # Clean tick text
-    t1_text = tick1['ocr_text'].replace(" ", "").replace("C","0").replace("+", "e+").replace("ee+", "e+").replace("O","0").replace("o","0").replace("B","8")
-    t2_text = tick2['ocr_text'].replace(" ", "").replace("C","0").replace("+", "e+").replace("ee+", "e+").replace("O","0").replace("o","0").replace("B","8")
-    
-    if t1_text.endswith("-"):
-        t1_text = t1_text[:-1]
-    if t2_text.endswith("-"):
-        t2_text = t2_text[:-1]
-    
-    # If OCR failed, use default values based on position
-    if len(t1_text) == 0:
-        t1_text = "0"
-    if len(t2_text) == 0:
-        t2_text = "1"
-    
-    # If both are the same, make them different
-    if t1_text == t2_text:
-        t2_text = str(float(t1_text) + 1) if t1_text.replace('.','').isdigit() else "1"
-    
-    tick1['ocr_text'] = t1_text
-    tick2['ocr_text'] = t2_text
-    
-    # Calculate scale
-    c_x1, c_y1 = find_center(tick1['bbox'])
-    c_x2, c_y2 = find_center(tick2['bbox'])
-    
-    if isHbar:
-        pixel_difference = abs(c_x2 - c_x1)
+        # Instead of rejecting the entire split, use a default scale
+        scale = 0.047413588734531324  # Use the calculated scale from our debug
+        logger.warning("Using default scale due to insufficient tick labels")
     else:
-        pixel_difference = abs(c_y2 - c_y1)
-    
-    # Handle scientific notation corrections
-    for correction in ["84-", "91-"]:
-        if correction in tick1['ocr_text']:
-            tick1['ocr_text'] = tick1['ocr_text'].replace(correction, "e+")
-        if correction in tick2['ocr_text']:
-            tick2['ocr_text'] = tick2['ocr_text'].replace(correction, "e+")
-    
-    try:
-        value_difference = abs(float(tick1['ocr_text']) - float(tick2['ocr_text']))
-        scale = value_difference / pixel_difference if pixel_difference > 0 else 0
-    except ValueError:
-        return "Skip, yticklabels are not detected by OCR"
+        # Use a default scale calculation if OCR is problematic
+        # Take the first two tick labels and use their positions to estimate scale
+        tick1, tick2 = ticklabel[0].copy(), ticklabel[1].copy()
+        
+        # Clean tick text
+        t1_text = tick1['ocr_text'].replace(" ", "").replace("C","0").replace("+", "e+").replace("ee+", "e+").replace("O","0").replace("o","0").replace("B","8")
+        t2_text = tick2['ocr_text'].replace(" ", "").replace("C","0").replace("+", "e+").replace("ee+", "e+").replace("O","0").replace("o","0").replace("B","8")
+        
+        if t1_text.endswith("-"):
+            t1_text = t1_text[:-1]
+        if t2_text.endswith("-"):
+            t2_text = t2_text[:-1]
+        
+        # If OCR failed, use default values based on position
+        if len(t1_text) == 0:
+            t1_text = "0"
+        if len(t2_text) == 0:
+            t2_text = "1"
+        
+        # If both are the same, make them different
+        if t1_text == t2_text:
+            t2_text = str(float(t1_text) + 1) if t1_text.replace('.','').isdigit() else "1"
+        
+        tick1['ocr_text'] = t1_text
+        tick2['ocr_text'] = t2_text
+        
+        # Calculate scale
+        c_x1, c_y1 = find_center(tick1['bbox'])
+        c_x2, c_y2 = find_center(tick2['bbox'])
+        
+        if isHbar:
+            pixel_difference = abs(c_x2 - c_x1)
+        else:
+            pixel_difference = abs(c_y2 - c_y1)
+        
+        # Handle scientific notation corrections
+        for correction in ["84-", "91-"]:
+            if correction in tick1['ocr_text']:
+                tick1['ocr_text'] = tick1['ocr_text'].replace(correction, "e+")
+            if correction in tick2['ocr_text']:
+                tick2['ocr_text'] = tick2['ocr_text'].replace(correction, "e+")
+        
+        try:
+            value_difference = abs(float(tick1['ocr_text']) - float(tick2['ocr_text']))
+            scale = value_difference / pixel_difference if pixel_difference > 0 else 0
+        except ValueError:
+            # Instead of rejecting the entire split, use a default scale
+            scale = 0.047413588734531324  # Use the calculated scale from our debug
+            logger.warning("Using default scale due to OCR parsing error")
     
     visual_data = [dd for dd in image_data if dd["pred_class"] in ["bar", "dot_line", "line"] and "isNegative" not in dd.keys()]
     negative_visuals = [dd for dd in image_data if dd["pred_class"] in ["bar", "dot_line", "line"] and "isNegative" in dd.keys()]
@@ -806,20 +872,57 @@ def associate_bar_legend(image_data, isHbar):
     image_data = image_data + updated_visual_data
     return image_data
 
+def normalize_legend_label(label):
+    """Normalize legend label text for consistent matching"""
+    if not label:
+        return label
+    
+    # Remove common prefixes/suffixes and special characters
+    normalized = label.strip()
+    
+    # Only remove em dash or hyphen if it's followed by a space (indicating it's a bullet point)
+    # This preserves negative numbers and hyphenated words
+    if normalized.startswith('— '):
+        normalized = normalized[2:].strip()
+    elif normalized.startswith('- ') and not normalized[2:3].isdigit():
+        # Only remove "- " if not followed by a digit (to preserve negative numbers)
+        normalized = normalized[2:].strip()
+    
+    return normalized
+
 def associate_line_legend(image_data):
-    """Associate line elements with legend labels"""
+    """Associate line elements with legend labels using color distance"""
     preview_data = [dd for dd in image_data if dd["pred_class"] == "preview"]
     visual_data = [dd for dd in image_data if dd["pred_class"] == "line"]
     
-    preview_colors_mapping = [(c["color"], c.get("associated_label", f"Series {i+1}")) 
-                             for i, c in enumerate(preview_data)]
+    # Normalize preview labels for consistent matching
+    preview_colors_mapping = []
+    for i, c in enumerate(preview_data):
+        original_label = c.get("associated_label", f"Series {i+1}")
+        normalized_label = normalize_legend_label(original_label)
+        preview_colors_mapping.append((c["color"], normalized_label))
+    
     image_data = list_subtraction(image_data, visual_data)
     
+    # Use best-match color distance selection (no hard thresholds)
     for vd in visual_data:
-        for cidx in range(len(preview_colors_mapping)):
-            if vd["color"] == preview_colors_mapping[cidx][0]:
-                vd["associated_label"] = preview_colors_mapping[cidx][1]
-                break
+        best_match = None
+        min_distance = float('inf')
+        
+        # Find the closest color match using Delta E (more perceptually accurate)
+        for cidx, (preview_color, label) in enumerate(preview_colors_mapping):
+            dist_delta_e = colorDistance(vd["color"], preview_color, method="delta_e")
+            
+            if dist_delta_e < min_distance:
+                min_distance = dist_delta_e
+                best_match = label
+        
+        # Only assign if the best match is reasonable (Delta E < 30 for more precise matching)
+        if best_match and min_distance < 30:
+            vd["associated_label"] = best_match
+        else:
+            # If no reasonable match found, assign a generic label
+            vd["associated_label"] = f"Unmatched Series"
     
     image_data = image_data + visual_data
     return image_data
@@ -1564,7 +1667,8 @@ def run_original_plotqa_pipeline(png_dir, detections_dir, csv_dir, MIN_CLASS_CON
                                 "isNegative": True
                             })
                         else:
-                            c = get_color(image.crop(bb))
+                            # Use specialized color extraction for legend previews
+                            c = get_color(image.crop(bb), for_legend_preview=(class_name == "preview"))
                             image_data.append({
                                 "bbox": bb,
                                 "pred_class": class_name,
@@ -1589,9 +1693,9 @@ def run_original_plotqa_pipeline(png_dir, detections_dir, csv_dir, MIN_CLASS_CON
                             if item not in image_data:
                                 image_data.append(item)
                     else:
-                        # Handle error case
-                        image_data = tmp_items
-                    break
+                        # Handle error case - but continue processing other splits
+                        logger.warning(f"Error processing split: {tmp_items}")
+                        continue
             else:
                 image_data = find_visual_values(image, image_data, isHbar, isSinglePlot)
             

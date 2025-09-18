@@ -274,37 +274,31 @@ class PlotQAProcessor:
                 ylabel = df['ylabel'].iloc[0] if 'ylabel' in df.columns and not df.empty else ""
                 
                 # Get the main axis column (first column that's not metadata)
-                metadata_cols = ['title', 'xlabel', 'ylabel', 'legend orientation']
+                metadata_cols = ['title', 'xlabel', 'ylabel', 'legend orientation', 'plot_type']
                 data_cols = [col for col in df.columns if col not in metadata_cols]
                 
-                # Determine chart type based on columns and data
-                chart_type = "unknown"
-                
-                # Check for bar chart indicators
-                if any("bar" in str(col).lower() for col in df.columns):
-                    chart_type = "bar"
-                # Check for line chart indicators  
-                elif any("line" in str(col).lower() for col in df.columns):
-                    chart_type = "line"
-                # Check data patterns to infer chart type
-                elif len(data_cols) > 1:
-                    # If we have multiple data columns, likely a bar chart
-                    chart_type = "bar"
-                elif len(data_cols) == 1:
-                    # Single data column could be bar or line
-                    # Check if values are discrete (likely bar) or continuous (likely line)
-                    try:
-                        value_col = data_cols[0]
-                        if value_col in df.columns:
-                            values = pd.to_numeric(df[value_col], errors='coerce').dropna()
-                            if len(values) > 0:
-                                # If values are mostly integers and small range, likely bar chart
-                                if all(v == int(v) for v in values) and len(set(values)) <= 10:
-                                    chart_type = "bar"
-                                else:
-                                    chart_type = "line"
-                    except:
-                        chart_type = "bar"  # Default to bar for single series
+                # Use plot_type from OCR/SIE pipeline if available, otherwise use heuristics
+                if 'plot_type' in df.columns and not df.empty:
+                    chart_type = df['plot_type'].iloc[0]
+                    logger.info(f"Using plot_type from pipeline: {chart_type}")
+                else:
+                    # Fallback to heuristic detection only if plot_type not available
+                    logger.warning("No plot_type found in CSV, using heuristic detection")
+                    
+                    # Check for explicit chart type indicators in column names
+                    if any("bar" in str(col).lower() for col in df.columns):
+                        chart_type = "bar"
+                    elif any("line" in str(col).lower() for col in df.columns):
+                        chart_type = "line"
+                    elif len(data_cols) > 2:
+                        # Many data series suggest line chart
+                        chart_type = "line" 
+                    elif len(data_cols) == 1:
+                        # Single data column - default to line for time series
+                        chart_type = "line"
+                    else:
+                        # Multiple data columns suggest line chart
+                        chart_type = "line"
                 
                 # Extract data series
                 data_series = []
