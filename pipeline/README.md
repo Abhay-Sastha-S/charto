@@ -9,16 +9,19 @@ This pipeline takes chart images (bar charts, line graphs, scatter plots) as inp
 - Axis labels and tick values  
 - Data series with extracted values
 - Legend information
+- **Visual element values** (heights, lengths, positions)
 
 **Key Features:**
-- **Modernized Implementation**: Uses Detectron2 (PyTorch-based) instead of original Detectron (Caffe2-based)
-- **Original Pipeline Compatibility**: Maintains compatibility with original PlotQA dataset structure and formats
+- **Caffe2 Compatibility**: Full compatibility with original PlotQA Caffe2 models through specialized detectors
+- **Dual Architecture Support**: Both Caffe2-compatible and exact Caffe2 architecture replication
 - **Enhanced Output**: Provides both CSV (original format) and JSON (structured) outputs
+- **Visual Value Calculation**: Calculates numerical values for visual elements (bars, lines, dots)
 
 The pipeline consists of three main stages:
-1. **VED (Visual Element Detection)**: Uses Detectron2 Faster R-CNN with FPN to detect chart elements
+1. **VED (Visual Element Detection)**: Uses specialized Caffe2-compatible detectors for original PlotQA models
 2. **OCR (Optical Character Recognition)**: Extracts text from detected regions using Tesseract
 3. **SIE (Structural Information Extraction)**: Builds structured data from detections and OCR results
+4. **Visual Value Calculation**: Computes numerical values for visual elements using coordinate-based scaling
 
 ## Installation
 
@@ -71,87 +74,232 @@ pip install pandas numpy scipy matplotlib tqdm click pyyaml
 
 ## Usage
 
-### Quick Start - End-to-End Extraction
+### Main Pipeline Scripts
 
-Extract data from a single chart image:
+The pipeline provides two main entry points for chart processing:
+
+#### 1. Basic Chart Processing (`process_chart.py`)
+
+Extract structured data from chart images using the complete PlotQA pipeline:
 
 ```bash
-python extract_data.py \
-    --image_path chart.png \
-    --model_path ./models/ved/model_final.pth \
-    --output result.json
+# Basic usage with Caffe2-compatible detector (recommended)
+python process_chart.py \
+    --image chart.png \
+    --model models/ved/model_final.pkl \
+    --use-caffe2
+
+# Use exact Caffe2 architecture replication (most compatible)
+python process_chart.py \
+    --image chart.png \
+    --model models/ved/model_final.pkl \
+    --use-exact-caffe2
+
+# Custom output directory and confidence threshold
+python process_chart.py \
+    --image chart.png \
+    --model models/ved/model_final.pkl \
+    --output results/ \
+    --confidence 0.7 \
+    --use-caffe2
+
+# Enable debug mode for detailed analysis
+python process_chart.py \
+    --image chart.png \
+    --model models/ved/model_final.pkl \
+    --use-caffe2 \
+    --debug
 ```
 
-Process multiple images:
+**Output Files:**
+- `{image_name}.csv` - Original PlotQA format
+- `{image_name}.json` - Structured JSON format
+- `{image_name}_metadata.json` - Processing metadata
+- `temp/` directory (if `--debug`) - Debug visualizations and detection details
+
+#### 2. Visual Values Calculation (`calculate_visual_values.py`)
+
+Extract chart data AND calculate numerical values for visual elements:
 
 ```bash
-python extract_data.py \
-    --image_dir ./charts/ \
-    --model_path ./models/ved/model_final.pth \
-    --output_dir ./results/
+# Basic usage with visual value calculation
+python calculate_visual_values.py \
+    --image chart.png \
+    --model models/ved/model_final.pkl \
+    --use-caffe2
+
+# Enable debug mode for full visual value calculation
+python calculate_visual_values.py \
+    --image chart.png \
+    --model models/ved/model_final.pkl \
+    --use-caffe2 \
+    --debug
+
+# Use Detectron2 detector instead of Caffe2
+python calculate_visual_values.py \
+    --image chart.png \
+    --model models/ved/model_final.pkl \
+    --use-detectron2
 ```
 
-### Training Your Own Model
+**Additional Output Files:**
+- `{image_name}_visual_values.json` - Visual element values with coordinates and scaling
+- Enhanced debug information with coordinate-based calculations
 
-Train the VED (Visual Element Detection) model (matches original PlotQA pipeline):
+### Caffe2 Detector Architecture Options
 
-```bash
-# Train on main 50k dataset (default)
-python train_ved.py \
-    --data_dir ~/data/plotqa/ \
-    --output_dir ./models/ved/ \
-    --batch_size 4 \
-    --max_iter 40000
+The pipeline supports multiple detector architectures for maximum compatibility:
 
-# Train on alternative datasets
-python train_ved.py \
-    --data_dir ~/data/plotqa/ \
-    --output_dir ./models/ved/ \
-    --train_dataset plotqa_train2 \
-    --batch_size 4 \
-    --max_iter 40000
+#### Caffe2-Compatible Detector (`caffe2_compatible_detector.py`)
+- **Purpose**: Provides compatibility with original PlotQA Caffe2 models
+- **Features**: 
+  - Loads original `.pkl` model files
+  - Maintains original detection format
+  - Optimized for PlotQA dataset models
+- **Usage**: `--use-caffe2` flag
+
+#### Exact Caffe2 Architecture Replication (`exact_caffe2_detector.py`)
+- **Purpose**: Exact replication of original Caffe2 architecture
+- **Features**:
+  - Pixel-perfect compatibility with original models
+  - Handles edge cases in original implementation
+  - Best for production use with original PlotQA models
+- **Usage**: `--use-exact-caffe2` flag (recommended)
+
+#### Detectron2 Detector (`generate_detections.py`)
+- **Purpose**: Modern PyTorch-based detection
+- **Features**:
+  - Faster inference
+  - Better GPU utilization
+  - Modern PyTorch ecosystem integration
+- **Usage**: `--use-detectron2` flag or omit Caffe2 flags
+
+## Caffe2 Detector Architecture Details
+
+### Why Caffe2 Compatibility?
+
+The original PlotQA models were trained using Caffe2, and while Detectron2 provides modern PyTorch-based detection, there can be subtle differences in:
+- Model loading and initialization
+- Preprocessing pipelines
+- Post-processing steps
+- Numerical precision
+
+Our Caffe2-compatible detectors ensure pixel-perfect compatibility with original PlotQA models.
+
+### Architecture Comparison
+
+| Feature | Caffe2-Compatible | Exact Caffe2 | Detectron2 |
+|---------|------------------|--------------|------------|
+| **Model Loading** | Original `.pkl` files | Original `.pkl` files | Converted `.pth` files |
+| **Preprocessing** | Original pipeline | Exact original pipeline | Modern pipeline |
+| **Post-processing** | Original NMS | Exact original NMS | Modern NMS |
+| **Compatibility** | High | Perfect | Good |
+| **Performance** | Good | Good | Best |
+| **Maintenance** | Medium | High | Low |
+
+### Technical Implementation
+
+#### Caffe2-Compatible Detector (`caffe2_compatible_detector.py`)
+```python
+class Caffe2CompatibleDetector:
+    def __init__(self, model_path, confidence_threshold=0.1):
+        # Load original Caffe2 model
+        self.model = self._load_caffe2_model(model_path)
+        # Configure preprocessing to match original
+        self.preprocessor = self._setup_preprocessing()
+        # Configure post-processing
+        self.postprocessor = self._setup_postprocessing()
+    
+    def detect_single_image(self, image_path):
+        # Resize to 650x650 (original PlotQA size)
+        resized_image = self._resize_image(image_path, (650, 650))
+        # Run inference
+        detections = self._run_inference(resized_image)
+        # Apply confidence filtering
+        filtered_detections = self._filter_detections(detections)
+        return filtered_detections, resized_image, original_dimensions
 ```
 
-Training parameters:
-- `--train_dataset`: Training dataset (plotqa_train1/plotqa_train2/plotqa_train3, default: plotqa_train1)
-- `--batch_size`: Batch size (default: 4)
-- `--learning_rate`: Learning rate (default: 0.001)  
-- `--max_iter`: Training iterations (default: 40000)
-- `--num_workers`: Data loader workers (default: 4)
+#### Exact Caffe2 Architecture Replication (`exact_caffe2_detector.py`)
+```python
+class ExactCaffe2Detector:
+    def __init__(self, model_path, confidence_threshold=0.1):
+        # Load with exact Caffe2 architecture
+        self.model = self._load_exact_caffe2_model(model_path)
+        # Replicate exact preprocessing steps
+        self.preprocessor = self._replicate_caffe2_preprocessing()
+        # Replicate exact post-processing
+        self.postprocessor = self._replicate_caffe2_postprocessing()
+    
+    def detect_single_image(self, image_path):
+        # Exact same preprocessing as original Caffe2
+        processed_image = self._exact_caffe2_preprocess(image_path)
+        # Run with exact same inference pipeline
+        detections = self._exact_caffe2_inference(processed_image)
+        # Apply exact same post-processing
+        final_detections = self._exact_caffe2_postprocess(detections)
+        return final_detections, processed_image, original_dimensions
+```
 
-### Step-by-Step Processing
+### Model File Compatibility
 
-For more control, run each stage separately:
+The pipeline supports both original Caffe2 model formats:
 
-#### 1. Generate Detections
+- **`.pkl` files**: Original Caffe2 pickle files (recommended)
+- **`.pth` files**: PyTorch state dict files (for Detectron2)
+
+For best compatibility with original PlotQA models, use `.pkl` files with Caffe2-compatible detectors.
+
+### Advanced Usage
+
+#### Command Line Arguments
+
+**Common Arguments:**
+- `--image`: Path to input chart image (required)
+- `--model`: Path to trained VED model weights (required)
+- `--output`: Output directory (default: "results")
+- `--confidence`: Detection confidence threshold (default: 0.3)
+- `--debug`: Enable debug mode for detailed analysis
+- `--verbose`: Enable verbose logging
+
+**Detector Selection:**
+- `--use-caffe2`: Use Caffe2-compatible detector (recommended for original models)
+- `--use-exact-caffe2`: Use exact Caffe2 architecture replication (most compatible)
+- `--use-detectron2`: Use Detectron2 detector (modern PyTorch-based)
+
+#### Debug Mode Features
+
+When using `--debug` flag, the pipeline generates additional files in a `temp/` directory:
+
+- `detection_summary.json` - Detailed detection information with coordinates
+- `detections_visualized.png` - Image with bounding boxes overlaid
+- `ocr_debug.json` - OCR results with extended bounding boxes
+- `ocr_with_extended_bboxes.png` - Visualization of OCR processing
+- `debug_crops/` - Individual cropped regions for each detected element
+
+#### Step-by-Step Processing
+
+For advanced users who need more control, individual components can be used separately:
 
 ```bash
-# Single image
+# 1. Generate detections only
 python generate_detections.py \
-    --model_path ./models/ved/model_final.pth \
+    --model_path ./models/ved/model_final.pkl \
     --image_path chart.png \
     --output detections.txt
 
-# Batch processing
-python generate_detections.py \
-    --model_path ./models/ved/model_final.pth \
-    --image_dir ./images/ \
-    --output ./detections/ \
-    --output_format json
-```
-
-#### 2. OCR and Structural Extraction
-
-```bash
+# 2. OCR and structural extraction
 python ocr_and_sie.py \
     --image_dir ./images/ \
     --detections_dir ./detections/ \
     --output_dir ./extracted/
 ```
 
-## Output Format
+## Output Formats
 
-The pipeline outputs JSON with the following structure:
+### Standard JSON Output (`process_chart.py`)
+
+The pipeline outputs structured JSON with the following format:
 
 ```json
 {
@@ -159,34 +307,72 @@ The pipeline outputs JSON with the following structure:
   "title": "Sales by Quarter",
   "x_axis": {
     "label": "Quarter",
-    "ticks": ["Q1", "Q2", "Q3", "Q4"],
-    "values": ["Q1", "Q2", "Q3", "Q4"]
+    "type": "categorical"
   },
   "y_axis": {
     "label": "Sales ($M)",
-    "ticks": ["0", "10", "20", "30"],
-    "values": [0, 10, 20, 30]
+    "type": "numeric"
   },
   "data_series": [
     {
       "name": "Sales",
       "type": "bar",
-      "x_values": ["Q1", "Q2", "Q3", "Q4"],
-      "y_values": [15.2, 23.1, 18.7, 28.3]
+      "data": [
+        {"x": "Q1", "y": 15.2},
+        {"x": "Q2", "y": 23.1},
+        {"x": "Q3", "y": 18.7},
+        {"x": "Q4", "y": 28.3}
+      ]
     }
   ],
-  "legend": {
-    "labels": ["Sales"],
-    "position": "right"
-  },
   "metadata": {
-    "image_path": "chart.png",
-    "image_dimensions": [800, 600],
-    "total_detections": 25,
-    "text_extractions": 12,
-    "confidence_threshold": 0.5
+    "source_image": "chart.png",
+    "extraction_method": "PlotQA Pipeline",
+    "total_series": 1
   }
 }
+```
+
+### Visual Values Output (`calculate_visual_values.py`)
+
+When using `calculate_visual_values.py`, additional visual value data is included:
+
+```json
+{
+  "chart_orientation": {
+    "isHbar": false,
+    "isSinglePlot": true
+  },
+  "visual_elements_with_values": [
+    {
+      "pred_class": "bar",
+      "bbox": [100, 200, 150, 400],
+      "confidence": 0.95,
+      "x_value": "Q1",
+      "y_value": 15.2,
+      "ocr_text": null
+    },
+    {
+      "pred_class": "xticklabel",
+      "bbox": [120, 450, 140, 470],
+      "confidence": 0.88,
+      "ocr_text": "Q1"
+    }
+  ],
+  "calculation_method": "find_visual_values_algorithm"
+}
+```
+
+### CSV Output (Original PlotQA Format)
+
+The pipeline also generates CSV files in the original PlotQA format for compatibility:
+
+```csv
+title,xlabel,ylabel,Sales
+Sales by Quarter,Quarter,Sales ($M),15.2
+Sales by Quarter,Quarter,Sales ($M),23.1
+Sales by Quarter,Quarter,Sales ($M),18.7
+Sales by Quarter,Quarter,Sales ($M),28.3
 ```
 
 ## Supported Chart Types
@@ -258,71 +444,123 @@ The VED model detects the following chart elements (matching original PlotQA cat
 
 ### Debug Mode
 
-Enable verbose logging for debugging:
+Enable verbose logging and detailed analysis:
 
 ```bash
-python extract_data.py --image_path chart.png --model_path model.pth --verbose
+# Basic debug mode
+python process_chart.py --image chart.png --model models/ved/model_final.pkl --use-caffe2 --debug
+
+# Visual values with debug
+python calculate_visual_values.py --image chart.png --model models/ved/model_final.pkl --use-caffe2 --debug --verbose
 ```
 
 ## File Structure
 
 ```
 pipeline/
-├── setup.sh                 # Installation script
-├── train_ved.py             # VED model training
-├── generate_detections.py   # Detection generation  
-├── ocr_and_sie.py          # OCR and structural extraction
-├── extract_data.py         # End-to-end pipeline
-└── README.md               # This file
+├── process_chart.py                    # Main chart processing script
+├── calculate_visual_values.py          # Visual values calculation script
+├── caffe2_compatible_detector.py       # Caffe2-compatible detector
+├── exact_caffe2_detector.py            # Exact Caffe2 architecture replication
+├── generate_detections.py              # Detectron2-based detection
+├── ocr_and_sie.py                     # OCR and structural extraction
+├── utils.py                           # Utility functions
+├── bbox_conversion.py                 # Bounding box conversion utilities
+├── upscale_boxes.py                   # Box upscaling functionality
+├── setup.sh                          # Installation script
+└── README.md                          # This file
 
 models/
-└── ved/                    # Trained model weights
+└── ved/                               # Trained model weights
+    ├── model_final.pkl                # Caffe2 model file
+    ├── model_iter19999.pkl            # Training checkpoint
+    ├── net.pbtxt                      # Network architecture
+    └── param_init_net.pbtxt           # Parameter initialization
 
 data/
-└── plotqa/                 # PlotQA dataset
+└── plotqa/                            # PlotQA dataset
+    ├── TRAIN/                         # Training images
+    ├── VAL/                           # Validation images
+    ├── TEST/                          # Test images
+    └── annotations/                   # COCO-style annotations
 
-output/
-├── detections/             # Detection results
-└── extracted/              # Final extracted data
+results/                               # Output directory
+├── {image_name}.csv                   # Original PlotQA CSV format
+├── {image_name}.json                  # Structured JSON format
+├── {image_name}_metadata.json         # Processing metadata
+└── {image_name}_visual_values.json    # Visual values (if using calculate_visual_values.py)
 ```
 
 ## API Reference
 
-### ChartDataExtractor
+### PlotQAProcessor
 
-Main pipeline class for end-to-end extraction:
+Main pipeline class for chart processing:
 
 ```python
-from extract_data import ChartDataExtractor
+from process_chart import PlotQAProcessor
 
-extractor = ChartDataExtractor(
-    model_path="./models/ved/model_final.pth",
-    confidence_threshold=0.5
+# Initialize with Caffe2-compatible detector
+processor = PlotQAProcessor(
+    model_path="./models/ved/model_final.pkl",
+    confidence_threshold=0.3,
+    use_caffe2=True,
+    use_exact_caffe2=True,
+    debug=False
 )
 
-result = extractor.extract_from_image("chart.png")
+# Process a single image
+results = processor.process_image("chart.png", "output_dir")
 ```
 
-### PlotQADetector
+### VisualValuesCalculator
 
-Visual element detection:
+Extended processor with visual value calculations:
 
 ```python
-from generate_detections import PlotQADetector
+from calculate_visual_values import VisualValuesCalculator
 
-detector = PlotQADetector(model_path="model.pth")
-detections = detector.detect_single_image("chart.png")
+# Initialize calculator
+calculator = VisualValuesCalculator(
+    model_path="./models/ved/model_final.pkl",
+    confidence_threshold=0.3,
+    use_caffe2=True,
+    use_exact_caffe2=True,
+    debug=True  # Enable for full visual value calculation
+)
+
+# Process with visual values
+results = calculator.process_with_values("chart.png", "output_dir")
 ```
 
-### OCRProcessor  
+### Caffe2-Compatible Detector
 
-Text extraction:
+Direct access to Caffe2-compatible detection:
 
 ```python
-from ocr_and_sie import OCRProcessor
+from caffe2_compatible_detector import Caffe2CompatibleDetector
 
-ocr = OCRProcessor()
-text = ocr.extract_text(image, bbox)
+detector = Caffe2CompatibleDetector(
+    model_path="./models/ved/model_final.pkl",
+    confidence_threshold=0.3
+)
+
+detections, resized_image, original_dimensions = detector.detect_single_image("chart.png")
+```
+
+### Exact Caffe2 Detector
+
+Exact Caffe2 architecture replication:
+
+```python
+from exact_caffe2_detector import ExactCaffe2Detector
+
+detector = ExactCaffe2Detector(
+    model_path="./models/ved/model_final.pkl",
+    confidence_threshold=0.3
+)
+
+detections, resized_image, original_dimensions = detector.detect_single_image("chart.png")
 ```
 
 ## Contributing
@@ -372,18 +610,32 @@ This implementation maintains compatibility with the original PlotQA pipeline wh
 ### Migration from Original:
 If you have an existing PlotQA setup, you can:
 1. Use the same dataset directory structure
-2. Replace the VED training with `train_ved.py` 
-3. Replace detection generation with `generate_detections.py`
-4. Replace OCR/SIE with `ocr_and_sie.py`
-5. Get both original CSV and new JSON outputs
+2. Use the same `.pkl` model files with Caffe2-compatible detectors
+3. Replace detection generation with `process_chart.py` or `calculate_visual_values.py`
+4. Get both original CSV and new JSON outputs
+5. Access visual element values with coordinate-based calculations
 
 ## Testing
 
-Run the test suite to validate pipeline components:
+Test the pipeline with sample images:
 
 ```bash
-cd pipeline
-python test_pipeline.py
+# Test basic processing
+python process_chart.py --image test_chart.png --model models/ved/model_final.pkl --use-caffe2
+
+# Test visual values calculation
+python calculate_visual_values.py --image test_chart.png --model models/ved/model_final.pkl --use-caffe2 --debug
+
+# Test different detector architectures
+python process_chart.py --image test_chart.png --model models/ved/model_final.pkl --use-exact-caffe2
+python process_chart.py --image test_chart.png --model models/ved/model_final.pkl --use-detectron2
+
+#if error
+
+$env:KMP_DUPLICATE_LIB_OK="TRUE"; python calculate_visual_values.py --image test_chart.png --model models/ved/model_final.pkl --confidence 0.05 --use-caffe2 --debug --verbose 
+
+$env:KMP_DUPLICATE_LIB_OK="TRUE"; python process_chart.py --image test_chart.png --model models/ved/model_final.pkl --confidence 0.05 --use-caffe2 --debug --verbose 
+
 ```
 
 ## Acknowledgments
