@@ -1,10 +1,9 @@
 misc/
-pipeline/__pycache__/
-pipeline/temp/debug_crops/
-pipeline/bar_results/temp/debug_crops/
+__pycache__/
+bar_results/temp/debug_crops/
 data/
-*.pkl
-*.pbtxt
+# *.pkl
+# *.pbtxt
 pipeline/results/
 pipeline/temp/
 pipeline/*.png
