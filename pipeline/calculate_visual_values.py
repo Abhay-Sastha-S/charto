@@ -27,8 +27,7 @@ import cv2
 # Import process_chart components
 from process_chart import PlotQAProcessor
 
-# Add the misc/codes directory to the path to import utils and find_visual_values
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'misc', 'codes'))
+# Import local utilities
 from utils import find_center, find_Distance, list_subtraction, find_slope
 
 # Setup logging

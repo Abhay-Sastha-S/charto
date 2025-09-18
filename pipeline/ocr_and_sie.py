@@ -76,15 +76,9 @@ except ImportError:
         print("Error: Neither pyocr nor pytesseract available")
         tool = None
 
-# Color processing imports - exact match to original
-try:
-    from colormath.color_objects import sRGBColor, LabColor
-    from colormath.color_conversions import convert_color
-    from colormath.color_diff import delta_e_cie2000
-    COLORMATH_AVAILABLE = True
-except ImportError:
-    print("Warning: colormath not available, using basic color distance")
-    COLORMATH_AVAILABLE = False
+# Color processing - using our own implementation instead of colormath
+# (colormath had issues with numpy.asscalar in newer numpy versions)
+from utils import colorDistance
 
 class ChartElement:
     """Represents a detected chart element"""
@@ -178,26 +172,6 @@ def get_color(img, color_range=512):
     
     return list(most_present)
 
-def colorDistance(c1, c2, method="euclidian"):
-    """Calculate color distance"""
-    if method == "euclidian":
-        return _colorDistance(c1, c2)
-    elif method == "delta_e" and COLORMATH_AVAILABLE:
-        color1_rgb = sRGBColor(c1[0], c1[1], c1[2])
-        color2_rgb = sRGBColor(c2[0], c2[1], c2[2])
-        color1_lab = convert_color(color1_rgb, LabColor)
-        color2_lab = convert_color(color2_rgb, LabColor)
-        delta_e = delta_e_cie2000(color1_lab, color2_lab)
-        return delta_e
-    else:
-        return _colorDistance(c1, c2)
-
-def _colorDistance(c1, c2):
-    """Euclidean color distance"""
-    x1, y1, z1 = c1
-    x2, y2, z2 = c2
-    d = ((x2-x1)**2 + (y2-y1)**2 + (z2-z1)**2)**0.5
-    return d
 
 def find_plot_type(image_data):
     """Determine plot type from detected elements"""
@@ -870,7 +844,7 @@ def split_image_data(image_data):
         min_d = 1e10
         color_index = -1
         for cidx, pc in enumerate(preview_colors):
-            d = colorDistance(vd["color"], pc, method="delta_e" if COLORMATH_AVAILABLE else "euclidian")
+            d = colorDistance(vd["color"], pc, method="delta_e")
             if d <= min_d:
                 color_index = cidx
                 min_d = d
