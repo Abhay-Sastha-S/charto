@@ -1,0 +1,268 @@
+{
+  "chart_orientation": {
+    "isHbar": false,
+    "isSinglePlot": true
+  },
+  "visual_elements_with_values": [
+    {
+      "pred_class": "xticklabel",
+      "bbox": [
+        174.279,
+        541.7090000000001,
+        192.151,
+        619.9010000000001
+      ],
+      "ocr_text": "1 Maldives",
+      "confidence": 0.999993
+    },
+    {
+      "pred_class": "xticklabel",
+      "bbox": [
+        390.498,
+        536.5439999999999,
+        405.92199999999997,
+        636.576
+      ],
+      "ocr_text": "= Mauritania",
+      "confidence": 0.999986
+    },
+    {
+      "pred_class": "xticklabel",
+      "bbox": [
+        66.268,
+        540.4760000000001,
+        83.612,
+        619.6439999999999
+      ],
+      "ocr_text": "1 Malaysia",
+      "confidence": 0.999865
+    },
+    {
+      "pred_class": "yticklabel",
+      "bbox": [
+        18.349999999999998,
+        196.27499999999998,
+        32.91,
+        216.03500000000003
+      ],
+      "ocr_text": "10",
+      "confidence": 0.999842
+    },
+    {
+      "pred_class": "xticklabel",
+      "bbox": [
+        604.142,
+        544.8910000000001,
+        621.198,
+        607.819
+      ],
+      "ocr_text": "- Mexico",
+      "confidence": 0.999825
+    },
+    {
+      "pred_class": "yticklabel",
+      "bbox": [
+        18.274,
+        61.10699999999999,
+        33.506,
+        80.643
+      ],
+      "ocr_text": "14",
+      "confidence": 0.999783
+    },
+    {
+      "pred_class": "xticklabel",
+      "bbox": [
+        281.42199999999997,
+        548.8249999999999,
+        299.598,
+        589.385
+      ],
+      "ocr_text": "Te -",
+      "confidence": 0.999765
+    },
+    {
+      "pred_class": "yticklabel",
+      "bbox": [
+        18.772,
+        129.102,
+        32.308,
+        149.518
+      ],
+      "ocr_text": "12",
+      "confidence": 0.999314
+    },
+    {
+      "pred_class": "ylabel",
+      "bbox": [
+        5.4830000000000005,
+        200.94,
+        24.437,
+        375.66
+      ],
+      "ocr_text": "% of population",
+      "confidence": 0.998499
+    },
+    {
+      "pred_class": "xticklabel",
+      "bbox": [
+        496.593,
+        539.0329999999999,
+        513.697,
+        628.4570000000001
+      ],
+      "ocr_text": "L Mauritius",
+      "confidence": 0.998448
+    },
+    {
+      "pred_class": "title",
+      "bbox": [
+        0,
+        10.37,
+        527.087,
+        29.810000000000002
+      ],
+      "ocr_text": "Prevalence of undernourishment (in terms of % of population) in 2004",
+      "confidence": 0.996065
+    },
+    {
+      "pred_class": "xlabel",
+      "bbox": [
+        312.8485,
+        628.5235,
+        373.7015,
+        649.7265
+      ],
+      "ocr_text": "Couniry",
+      "confidence": 0.988452
+    },
+    {
+      "pred_class": "yticklabel",
+      "bbox": [
+        24.052,
+        399.94199999999995,
+        32.628,
+        419.398
+      ],
+      "ocr_text": "4",
+      "confidence": 0.894929
+    },
+    {
+      "pred_class": "yticklabel",
+      "bbox": [
+        24.875999999999998,
+        263.599,
+        34.124,
+        283.391
+      ],
+      "ocr_text": "8.",
+      "confidence": 0.668724
+    },
+    {
+      "pred_class": "yticklabel",
+      "bbox": [
+        24.442999999999998,
+        467.29299999999995,
+        32.747,
+        485.83700000000005
+      ],
+      "ocr_text": "2",
+      "confidence": 0.560898
+    },
+    {
+      "pred_class": "yticklabel",
+      "bbox": [
+        24.607,
+        332.215,
+        32.623000000000005,
+        351.495
+      ],
+      "ocr_text": "6",
+      "confidence": 0.251577
+    },
+    {
+      "pred_class": "yticklabel",
+      "bbox": [
+        305.131,
+        626.41,
+        383.419,
+        651.2099999999999
+      ],
+      "ocr_text": "",
+      "confidence": 0.056138
+    },
+    {
+      "pred_class": "bar",
+      "bbox": [
+        68.28719329833984,
+        373.3209228515625,
+        83.2261734008789,
+        545.6290893554688
+      ],
+      "confidence": 0.9982415437698364,
+      "x_value": "1 Malaysia",
+      "y_value": 4.658086568230805
+    },
+    {
+      "pred_class": "bar",
+      "bbox": [
+        175.69168090820312,
+        50.87034606933594,
+        190.42514038085938,
+        545.947509765625
+      ],
+      "confidence": 0.9998633861541748,
+      "x_value": "1 Maldives",
+      "y_value": 14.08164401054034
+    },
+    {
+      "pred_class": "bar",
+      "bbox": [
+        282.2002868652344,
+        174.9791717529297,
+        297.7151794433594,
+        547.9841918945312
+      ],
+      "confidence": 0.9985435009002686,
+      "x_value": "Te -",
+      "y_value": 10.454586929117275
+    },
+    {
+      "pred_class": "bar",
+      "bbox": [
+        390.318115234375,
+        161.19773864746094,
+        405.531005859375,
+        539.6480712890625
+      ],
+      "confidence": 0.999637246131897,
+      "x_value": "= Mauritania",
+      "y_value": 10.857346718858453
+    },
+    {
+      "pred_class": "bar",
+      "bbox": [
+        497.26763916015625,
+        346.34478759765625,
+        513.195068359375,
+        544.576904296875
+      ],
+      "confidence": 0.9960793852806091,
+      "x_value": "L Mauritius",
+      "y_value": 5.44645904587839
+    },
+    {
+      "pred_class": "bar",
+      "bbox": [
+        604.676025390625,
+        354.103271484375,
+        620.3983154296875,
+        545.8164672851562
+      ],
+      "confidence": 0.9991427659988403,
+      "x_value": "- Mexico",
+      "y_value": 5.219718813929277
+    }
+  ],
+  "calculation_method": "find_visual_values_algorithm"
+}

@@ -1,0 +1,49 @@
+{
+  "chart_type": "bar",
+  "title": "Prevalence of undernourishment (in terms of % of population) in 2004",
+  "x_axis": {
+    "label": "Country",
+    "type": "categorical"
+  },
+  "y_axis": {
+    "label": "% of population",
+    "type": "numeric"
+  },
+  "data_series": [
+    {
+      "name": "% of population",
+      "type": "bar",
+      "data": [
+        {
+          "x": "Maldives",
+          "y": 14.481751824817518
+        },
+        {
+          "x": "Mauritania",
+          "y": 11.27007299270073
+        },
+        {
+          "x": "Malaysia",
+          "y": 5.08029197080292
+        },
+        {
+          "x": "Mexico",
+          "y": 5.635036496350365
+        },
+        {
+          "x": "Tew",
+          "y": 10.861313868613138
+        },
+        {
+          "x": "Mauritius",
+          "y": 5.868613138686131
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source_image": "data/plotqa/VAL/png/33646.png",
+    "extraction_method": "PlotQA Pipeline",
+    "total_series": 1
+  }
+}

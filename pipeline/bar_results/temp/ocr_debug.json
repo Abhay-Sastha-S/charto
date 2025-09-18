@@ -1,0 +1,698 @@
+{
+  "chart_orientation": {
+    "isHbar": false,
+    "isSinglePlot": true
+  },
+  "ocr_results": [
+    {
+      "class": "xticklabel",
+      "confidence": 0.999993,
+      "original_bbox_650": [
+        177.63,
+        556.37,
+        188.8,
+        605.24
+      ],
+      "extended_bbox_650": [
+        174.279,
+        541.7090000000001,
+        192.151,
+        619.9010000000001
+      ],
+      "original_bbox_upscaled": [
+        249.50183076923076,
+        556.37,
+        265.1913846153846,
+        605.24
+      ],
+      "extended_bbox_upscaled": [
+        244.7949646153846,
+        541.7090000000001,
+        269.8982507692308,
+        619.9010000000001
+      ],
+      "ocr_text": "1 Maldives",
+      "bbox_extension": {
+        "width_extension": 3.351000000000005,
+        "height_extension": 14.661000000000001,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 11.170000000000016,
+          "height": 48.870000000000005
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.999986,
+      "original_bbox_650": [
+        393.39,
+        555.3,
+        403.03,
+        617.82
+      ],
+      "extended_bbox_650": [
+        390.498,
+        536.5439999999999,
+        405.92199999999997,
+        636.576
+      ],
+      "original_bbox_upscaled": [
+        552.5616461538461,
+        555.3,
+        566.1021384615384,
+        617.82
+      ],
+      "extended_bbox_upscaled": [
+        548.4994984615385,
+        536.5439999999999,
+        570.1642861538461,
+        636.576
+      ],
+      "ocr_text": "= Mauritania",
+      "bbox_extension": {
+        "width_extension": 2.891999999999996,
+        "height_extension": 18.75600000000003,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 9.639999999999986,
+          "height": 62.520000000000095
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.999865,
+      "original_bbox_650": [
+        69.52,
+        555.32,
+        80.36,
+        604.8
+      ],
+      "extended_bbox_650": [
+        66.268,
+        540.4760000000001,
+        83.612,
+        619.6439999999999
+      ],
+      "original_bbox_upscaled": [
+        97.64886153846153,
+        555.32,
+        112.8748923076923,
+        604.8
+      ],
+      "extended_bbox_upscaled": [
+        93.0810523076923,
+        540.4760000000001,
+        117.44270153846153,
+        619.6439999999999
+      ],
+      "ocr_text": "1 Malaysia",
+      "bbox_extension": {
+        "width_extension": 3.252000000000001,
+        "height_extension": 14.843999999999971,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.840000000000003,
+          "height": 49.479999999999905
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.999842,
+      "original_bbox_650": [
+        21.08,
+        199.98,
+        30.18,
+        212.33
+      ],
+      "extended_bbox_650": [
+        18.349999999999998,
+        196.27499999999998,
+        32.91,
+        216.03500000000003
+      ],
+      "original_bbox_upscaled": [
+        29.609292307692304,
+        199.98,
+        42.391292307692304,
+        212.33
+      ],
+      "extended_bbox_upscaled": [
+        25.774692307692305,
+        196.27499999999998,
+        46.225892307692305,
+        216.03500000000003
+      ],
+      "ocr_text": "10",
+      "bbox_extension": {
+        "width_extension": 2.7300000000000004,
+        "height_extension": 3.7050000000000067,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 9.100000000000001,
+          "height": 12.350000000000023
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.999825,
+      "original_bbox_650": [
+        607.34,
+        556.69,
+        618.0,
+        596.02
+      ],
+      "extended_bbox_650": [
+        604.142,
+        544.8910000000001,
+        621.198,
+        607.819
+      ],
+      "original_bbox_upscaled": [
+        853.0791076923077,
+        556.69,
+        868.0523076923076,
+        596.02
+      ],
+      "extended_bbox_upscaled": [
+        848.5871476923078,
+        544.8910000000001,
+        872.5442676923077,
+        607.819
+      ],
+      "ocr_text": "- Mexico",
+      "bbox_extension": {
+        "width_extension": 3.19799999999999,
+        "height_extension": 11.798999999999978,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.659999999999968,
+          "height": 39.32999999999993
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.999783,
+      "original_bbox_650": [
+        21.13,
+        64.77,
+        30.65,
+        76.98
+      ],
+      "extended_bbox_650": [
+        18.274,
+        61.10699999999999,
+        33.506,
+        80.643
+      ],
+      "original_bbox_upscaled": [
+        29.679523076923076,
+        64.77,
+        43.05146153846154,
+        76.98
+      ],
+      "extended_bbox_upscaled": [
+        25.66794153846154,
+        61.10699999999999,
+        47.06304307692308,
+        80.643
+      ],
+      "ocr_text": "14",
+      "bbox_extension": {
+        "width_extension": 2.856,
+        "height_extension": 3.663000000000002,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 9.52,
+          "height": 12.210000000000008
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.999765,
+      "original_bbox_650": [
+        284.83,
+        556.43,
+        296.19,
+        581.78
+      ],
+      "extended_bbox_650": [
+        281.42199999999997,
+        548.8249999999999,
+        299.598,
+        589.385
+      ],
+      "original_bbox_upscaled": [
+        400.0766,
+        556.43,
+        416.0330307692308,
+        581.78
+      ],
+      "extended_bbox_upscaled": [
+        395.2896707692307,
+        548.8249999999999,
+        420.81996000000004,
+        589.385
+      ],
+      "ocr_text": "Te -",
+      "bbox_extension": {
+        "width_extension": 3.408000000000004,
+        "height_extension": 7.605000000000007,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 11.360000000000014,
+          "height": 25.350000000000023
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.999314,
+      "original_bbox_650": [
+        21.31,
+        132.93,
+        29.77,
+        145.69
+      ],
+      "extended_bbox_650": [
+        18.772,
+        129.102,
+        32.308,
+        149.518
+      ],
+      "original_bbox_upscaled": [
+        29.932353846153845,
+        132.93,
+        41.8154,
+        145.69
+      ],
+      "extended_bbox_upscaled": [
+        26.36744,
+        129.102,
+        45.38031384615385,
+        149.518
+      ],
+      "ocr_text": "12",
+      "bbox_extension": {
+        "width_extension": 2.5380000000000003,
+        "height_extension": 3.827999999999997,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 8.46,
+          "height": 12.759999999999991
+        }
+      }
+    },
+    {
+      "class": "ylabel",
+      "confidence": 0.998499,
+      "original_bbox_650": [
+        7.67,
+        221.1,
+        22.25,
+        355.5
+      ],
+      "extended_bbox_650": [
+        5.4830000000000005,
+        200.94,
+        24.437,
+        375.66
+      ],
+      "original_bbox_upscaled": [
+        10.7734,
+        221.1,
+        31.252692307692307,
+        355.5
+      ],
+      "extended_bbox_upscaled": [
+        7.701506153846155,
+        200.94,
+        34.324586153846155,
+        375.66
+      ],
+      "ocr_text": "% of population",
+      "bbox_extension": {
+        "width_extension": 2.187,
+        "height_extension": 20.16,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 14.58,
+          "height": 134.4
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.998448,
+      "original_bbox_650": [
+        499.8,
+        555.8,
+        510.49,
+        611.69
+      ],
+      "extended_bbox_650": [
+        496.593,
+        539.0329999999999,
+        513.697,
+        628.4570000000001
+      ],
+      "original_bbox_upscaled": [
+        702.0267692307692,
+        555.8,
+        717.0421076923077,
+        611.69
+      ],
+      "extended_bbox_upscaled": [
+        697.5221676923077,
+        539.0329999999999,
+        721.5467092307692,
+        628.4570000000001
+      ],
+      "ocr_text": "L Mauritius",
+      "bbox_extension": {
+        "width_extension": 3.2069999999999994,
+        "height_extension": 16.767000000000028,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.689999999999998,
+          "height": 55.8900000000001
+        }
+      }
+    },
+    {
+      "class": "title",
+      "confidence": 0.996065,
+      "original_bbox_650": [
+        42.46,
+        11.99,
+        483.03,
+        28.19
+      ],
+      "extended_bbox_650": [
+        0,
+        10.37,
+        527.087,
+        29.810000000000002
+      ],
+      "original_bbox_upscaled": [
+        59.63996923076923,
+        11.99,
+        678.4713692307691,
+        28.19
+      ],
+      "extended_bbox_upscaled": [
+        0.0,
+        10.37,
+        740.3545092307692,
+        29.810000000000002
+      ],
+      "ocr_text": "Prevalence of undernourishment (in terms of % of population) in 2004",
+      "bbox_extension": {
+        "width_extension": 44.057,
+        "height_extension": 1.6200000000000003,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 440.57,
+          "height": 16.200000000000003
+        }
+      }
+    },
+    {
+      "class": "xlabel",
+      "confidence": 0.988452,
+      "original_bbox_650": [
+        319.87,
+        630.97,
+        366.68,
+        647.28
+      ],
+      "extended_bbox_650": [
+        312.8485,
+        628.5235,
+        373.7015,
+        649.7265
+      ],
+      "original_bbox_upscaled": [
+        449.2943230769231,
+        630.97,
+        515.0443692307692,
+        647.28
+      ],
+      "extended_bbox_upscaled": [
+        439.43181615384617,
+        628.5235,
+        524.9068761538462,
+        649.7265
+      ],
+      "ocr_text": "Couniry",
+      "bbox_extension": {
+        "width_extension": 7.0215000000000005,
+        "height_extension": 2.446499999999992,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 46.81,
+          "height": 16.309999999999945
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.894929,
+      "original_bbox_650": [
+        25.66,
+        403.59,
+        31.02,
+        415.75
+      ],
+      "extended_bbox_650": [
+        24.052,
+        399.94199999999995,
+        32.628,
+        419.398
+      ],
+      "original_bbox_upscaled": [
+        36.04243076923077,
+        403.59,
+        43.57116923076923,
+        415.75
+      ],
+      "extended_bbox_upscaled": [
+        33.78380923076923,
+        399.94199999999995,
+        45.82979076923077,
+        419.398
+      ],
+      "ocr_text": "4",
+      "bbox_extension": {
+        "width_extension": 1.6079999999999999,
+        "height_extension": 3.6480000000000072,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 5.359999999999999,
+          "height": 12.160000000000025
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.668724,
+      "original_bbox_650": [
+        26.61,
+        267.31,
+        32.39,
+        279.68
+      ],
+      "extended_bbox_650": [
+        24.875999999999998,
+        263.599,
+        34.124,
+        283.391
+      ],
+      "original_bbox_upscaled": [
+        37.376815384615384,
+        267.31,
+        45.49549230769231,
+        279.68
+      ],
+      "extended_bbox_upscaled": [
+        34.941212307692304,
+        263.599,
+        47.93109538461539,
+        283.391
+      ],
+      "ocr_text": "8.",
+      "bbox_extension": {
+        "width_extension": 1.7340000000000002,
+        "height_extension": 3.711000000000001,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 5.780000000000001,
+          "height": 12.370000000000005
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.560898,
+      "original_bbox_650": [
+        26.0,
+        470.77,
+        31.19,
+        482.36
+      ],
+      "extended_bbox_650": [
+        24.442999999999998,
+        467.29299999999995,
+        32.747,
+        485.83700000000005
+      ],
+      "original_bbox_upscaled": [
+        36.519999999999996,
+        470.77,
+        43.809953846153846,
+        482.36
+      ],
+      "extended_bbox_upscaled": [
+        34.33301384615384,
+        467.29299999999995,
+        45.99694,
+        485.83700000000005
+      ],
+      "ocr_text": "2",
+      "bbox_extension": {
+        "width_extension": 1.5570000000000004,
+        "height_extension": 3.4770000000000096,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 5.190000000000001,
+          "height": 11.590000000000032
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.251577,
+      "original_bbox_650": [
+        26.11,
+        335.83,
+        31.12,
+        347.88
+      ],
+      "extended_bbox_650": [
+        24.607,
+        332.215,
+        32.623000000000005,
+        351.495
+      ],
+      "original_bbox_upscaled": [
+        36.67450769230769,
+        335.83,
+        43.71163076923077,
+        347.88
+      ],
+      "extended_bbox_upscaled": [
+        34.563370769230765,
+        332.215,
+        45.8227676923077,
+        351.495
+      ],
+      "ocr_text": "6",
+      "bbox_extension": {
+        "width_extension": 1.5030000000000003,
+        "height_extension": 3.6150000000000033,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 5.010000000000002,
+          "height": 12.050000000000011
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.056138,
+      "original_bbox_650": [
+        319.81,
+        631.06,
+        368.74,
+        646.56
+      ],
+      "extended_bbox_650": [
+        305.131,
+        626.41,
+        383.419,
+        651.2099999999999
+      ],
+      "original_bbox_upscaled": [
+        449.2100461538462,
+        631.06,
+        517.9378769230769,
+        646.56
+      ],
+      "extended_bbox_upscaled": [
+        428.5916969230769,
+        626.41,
+        538.5562261538461,
+        651.2099999999999
+      ],
+      "ocr_text": "",
+      "bbox_extension": {
+        "width_extension": 14.679000000000002,
+        "height_extension": 4.6499999999999995,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 48.93000000000001,
+          "height": 15.5
+        }
+      }
+    }
+  ],
+  "class_summary": {
+    "xticklabel": {
+      "count": 6,
+      "texts": [
+        "1 Maldives",
+        "= Mauritania",
+        "1 Malaysia",
+        "- Mexico",
+        "Te -",
+        "L Mauritius"
+      ]
+    },
+    "yticklabel": {
+      "count": 8,
+      "texts": [
+        "10",
+        "14",
+        "12",
+        "4",
+        "8.",
+        "2",
+        "6",
+        ""
+      ]
+    },
+    "ylabel": {
+      "count": 1,
+      "texts": [
+        "% of population"
+      ]
+    },
+    "title": {
+      "count": 1,
+      "texts": [
+        "Prevalence of undernourishment (in terms of % of population) in 2004"
+      ]
+    },
+    "xlabel": {
+      "count": 1,
+      "texts": [
+        "Couniry"
+      ]
+    }
+  }
+}
