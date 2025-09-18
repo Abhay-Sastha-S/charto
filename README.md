@@ -2,6 +2,18 @@
 
 A complete end-to-end pipeline for extracting structured data from chart and graph images, based on the PlotQA paper ("PlotQA: Reasoning over Scientific Plots" by Nitesh Methani et al., 2020).
 
+## 🚀 Quick Start
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+pip install --extra-index-url https://miropsota.github.io/torch_packages_builder detectron2==detectron2-0.6+18f6958pt2.8.0cu128
+
+# Download model weights (see Installation section)
+# Then run:
+python process_chart.py --image your_chart.png --model models/ved/model_final.pkl --use-caffe2 --confidence 0.05
+```
+
 ## Overview
 
 This pipeline takes chart images (bar charts, line graphs, scatter plots) as input and outputs structured JSON data containing:
@@ -16,8 +28,9 @@ This pipeline takes chart images (bar charts, line graphs, scatter plots) as inp
 - **Dual Architecture Support**: Both Caffe2-compatible and exact Caffe2 architecture replication
 - **Enhanced Output**: Provides both CSV (original format) and JSON (structured) outputs
 - **Visual Value Calculation**: Calculates numerical values for visual elements (bars, lines, dots)
+- **Debug Mode**: Comprehensive debugging and visualization tools
 
-The pipeline consists of three main stages:
+The pipeline consists of four main stages:
 1. **VED (Visual Element Detection)**: Uses specialized Caffe2-compatible detectors for original PlotQA models
 2. **OCR (Optical Character Recognition)**: Extracts text from detected regions using Tesseract
 3. **SIE (Structural Information Extraction)**: Builds structured data from detections and OCR results
@@ -26,125 +39,99 @@ The pipeline consists of three main stages:
 ## Installation
 
 ### Prerequisites
-- Python 3.8+
-- CUDA-compatible GPU (recommended for training)
-- Tesseract OCR installed as library and as external software and added to path
+- Python 3.8+ (tested with Python 3.12.11)
+- CUDA-compatible GPU (recommended for inference)
+- Tesseract OCR
 
-### Setup
-Run the setup script to install all dependencies:
+### Installation Options
 
+#### Option 1: Latest Versions (Recommended)
 ```bash
-chmod +x setup.sh
-./setup.sh
-```
-
-Or install manually:
-
-```bash
-# Core dependencies
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+pip install -r requirements.txt
 pip install --extra-index-url https://miropsota.github.io/torch_packages_builder detectron2==detectron2-0.6+18f6958pt2.8.0cu128
-
-# Computer vision and OCR
-pip install opencv-python pillow pyocr pytesseract
-
-# Data processing  
-pip install pandas numpy scipy matplotlib tqdm click pyyaml
 ```
 
-### Dataset Setup
-
-1. Download the PlotQA dataset from: https://drive.google.com/drive/folders/15bWhzXxAN4WsXn4p37t_GYABb1F52nQw?usp=sharing
-
-2. Extract to `~/data/plotqa/` with structure (matches original PlotQA pipeline):
-```
-~/data/plotqa/
-├── TRAIN/          # Training images
-├── VAL/            # Validation images  
-├── TEST/           # Test images
-└── annotations/    # COCO-style annotations
-    ├── train_50k_annotations.json      # Main training set (plotqa_train1)
-    ├── train_50k_1l_annotations.json   # Alternative training set (plotqa_train2)
-    ├── train_1l_end_annotations.json   # Alternative training set (plotqa_train3)
-    ├── val_annotations.json            # Validation set
-    └── test_annotations.json           # Test set
+#### Option 2: Exact Environment Replication
+```bash
+pip install -r requirements-pinned.txt
+pip install --extra-index-url https://miropsota.github.io/torch_packages_builder detectron2==detectron2-0.6+18f6958pt2.8.0cu128
 ```
 
-3. (Optional) Download pre-trained weights from: https://drive.google.com/drive/folders/1P00jD-WFg_RBissIPmuWEWct3xoM3mgU?usp=sharing
+### Download Required Files
+
+#### Model Weights (Required)
+Download from: https://drive.google.com/drive/folders/1P00jD-WFg_RBissIPmuWEWct3xoM3mgU?usp=sharing
+
+Required files:
+- `model_final.pkl` (~100MB+)
+- `net.pbtxt`
+- `param_init_net.pbtxt`
+
+Place in: `models/ved/`
+
+#### Dataset (Optional - for testing)
+Download from: https://drive.google.com/drive/folders/15bWhzXxAN4WsXn4p37t_GYABb1F52nQw?usp=sharing
+
+Place in: `data/plotqa/`
 
 ## Usage
 
-### Main Pipeline Scripts
-
-The pipeline provides two main entry points for chart processing:
-
-#### 1. Basic Chart Processing (`process_chart.py`)
-
-Extract structured data from chart images using the complete PlotQA pipeline:
+### Basic Usage
 
 ```bash
-# Basic usage with Caffe2-compatible detector (recommended)
-python process_chart.py \
-    --image chart.png \
-    --model models/ved/model_final.pkl \
-    --use-caffe2
+# Basic chart processing
+python process_chart.py --image your_chart.png --model models/ved/model_final.pkl --use-caffe2
 
-# Use exact Caffe2 architecture replication (most compatible)
-python process_chart.py \
-    --image chart.png \
-    --model models/ved/model_final.pkl \
-    --use-exact-caffe2
+# Visual values calculation with debug
+python calculate_visual_values.py --image your_chart.png --model models/ved/model_final.pkl --confidence 0.05 --use-caffe2 --debug
 
-# Custom output directory and confidence threshold
-python process_chart.py \
-    --image chart.png \
-    --model models/ved/model_final.pkl \
-    --output results/ \
-    --confidence 0.7 \
-    --use-caffe2
-
-# Enable debug mode for detailed analysis
-python process_chart.py \
-    --image chart.png \
-    --model models/ved/model_final.pkl \
-    --use-caffe2 \
-    --debug
+# With KMP fix for Windows
+$env:KMP_DUPLICATE_LIB_OK="TRUE"; python calculate_visual_values.py --image your_chart.png --model models/ved/model_final.pkl --confidence 0.05 --use-caffe2 --debug
 ```
 
-**Output Files:**
+### Test with Sample Data
+
+```bash
+# Test with PlotQA dataset (if downloaded)
+python process_chart.py --image data/plotqa/VAL/png/18458.png --model models/ved/model_final.pkl --use-caffe2
+
+# Test visual values calculation
+python calculate_visual_values.py --image data/plotqa/VAL/png/18458.png --model models/ved/model_final.pkl --confidence 0.05 --use-caffe2 --debug
+```
+
+### Advanced Usage
+
+#### Command Line Arguments
+
+**Common Arguments:**
+- `--image`: Path to input chart image (required)
+- `--model`: Path to trained VED model weights (required)
+- `--output`: Output directory (default: "results")
+- `--confidence`: Detection confidence threshold (default: 0.3)
+- `--debug`: Enable debug mode for detailed analysis
+- `--verbose`: Enable verbose logging
+
+**Detector Selection:**
+- `--use-caffe2`: Use Caffe2-compatible detector (recommended for original models)
+- `--use-exact-caffe2`: Use exact Caffe2 architecture replication (most compatible)
+- `--use-detectron2`: Use Detectron2 detector (modern PyTorch-based)
+
+#### Output Files
+
+**Standard Output:**
 - `{image_name}.csv` - Original PlotQA format
 - `{image_name}.json` - Structured JSON format
 - `{image_name}_metadata.json` - Processing metadata
-- `temp/` directory (if `--debug`) - Debug visualizations and detection details
 
-#### 2. Visual Values Calculation (`calculate_visual_values.py`)
-
-Extract chart data AND calculate numerical values for visual elements:
-
-```bash
-# Basic usage with visual value calculation
-python calculate_visual_values.py \
-    --image chart.png \
-    --model models/ved/model_final.pkl \
-    --use-caffe2
-
-# Enable debug mode for full visual value calculation
-python calculate_visual_values.py \
-    --image chart.png \
-    --model models/ved/model_final.pkl \
-    --use-caffe2 \
-    --debug
-
-# Use Detectron2 detector instead of Caffe2
-python calculate_visual_values.py \
-    --image chart.png \
-    --model models/ved/model_final.pkl \
-    --use-detectron2
-```
-
-**Additional Output Files:**
+**Visual Values Output (calculate_visual_values.py):**
 - `{image_name}_visual_values.json` - Visual element values with coordinates and scaling
-- Enhanced debug information with coordinate-based calculations
+
+**Debug Mode Output:**
+- `temp/detection_summary.json` - Detailed detection information
+- `temp/detections_visualized.png` - Image with bounding boxes
+- `temp/ocr_debug.json` - OCR results with extended bounding boxes
+- `temp/ocr_with_extended_bboxes.png` - OCR visualization
+- `temp/debug_crops/` - Individual cropped regions
 
 ### Caffe2 Detector Architecture Options
 
@@ -457,38 +444,37 @@ python calculate_visual_values.py --image chart.png --model models/ved/model_fin
 ## File Structure
 
 ```
-pipeline/
-├── process_chart.py                    # Main chart processing script
-├── calculate_visual_values.py          # Visual values calculation script
-├── caffe2_compatible_detector.py       # Caffe2-compatible detector
-├── exact_caffe2_detector.py            # Exact Caffe2 architecture replication
-├── generate_detections.py              # Detectron2-based detection
-├── ocr_and_sie.py                     # OCR and structural extraction
-├── utils.py                           # Utility functions
-├── bbox_conversion.py                 # Bounding box conversion utilities
-├── upscale_boxes.py                   # Box upscaling functionality
+charto/                                # Main project directory
+├── process_chart.py                   # Main chart processing script
+├── calculate_visual_values.py         # Visual values calculation script
+├── caffe2_compatible_detector.py      # Caffe2-compatible detector
+├── exact_caffe2_detector.py           # Exact Caffe2 architecture replication
+├── generate_detections.py             # Detectron2-based detection
+├── ocr_and_sie.py                    # OCR and structural extraction
+├── utils.py                          # Utility functions
+├── bbox_conversion.py                # Bounding box conversion utilities
+├── upscale_boxes.py                  # Box upscaling functionality
+├── requirements.txt                  # Complete dependencies list (latest versions)
+├── requirements-pinned.txt           # Exact versions from working environment
 ├── setup.sh                          # Installation script
-└── README.md                          # This file
-
-models/
-└── ved/                               # Trained model weights
-    ├── model_final.pkl                # Caffe2 model file
-    ├── model_iter19999.pkl            # Training checkpoint
-    ├── net.pbtxt                      # Network architecture
-    └── param_init_net.pbtxt           # Parameter initialization
-
-data/
-└── plotqa/                            # PlotQA dataset
-    ├── TRAIN/                         # Training images
-    ├── VAL/                           # Validation images
-    ├── TEST/                          # Test images
-    └── annotations/                   # COCO-style annotations
-
-results/                               # Output directory
-├── {image_name}.csv                   # Original PlotQA CSV format
-├── {image_name}.json                  # Structured JSON format
-├── {image_name}_metadata.json         # Processing metadata
-└── {image_name}_visual_values.json    # Visual values (if using calculate_visual_values.py)
+├── README.md                         # This file
+├── models/                           # Trained model weights
+│   └── ved/
+│       ├── model_final.pkl           # Caffe2 model file
+│       ├── model_iter19999.pkl       # Training checkpoint
+│       ├── net.pbtxt                 # Network architecture
+│       └── param_init_net.pbtxt      # Parameter initialization
+├── data/                             # PlotQA dataset
+│   └── plotqa/
+│       ├── TRAIN/                    # Training images
+│       ├── VAL/                      # Validation images
+│       ├── TEST/                     # Test images
+│       └── annotations/              # COCO-style annotations
+├── bar_results/                      # Example results
+└── misc/                             # Additional utilities and documentation
+    ├── codes/                        # Legacy code files
+    ├── docs/                         # Documentation
+    └── dataset_catalog.py            # Dataset utilities
 ```
 
 ## API Reference
@@ -615,6 +601,37 @@ If you have an existing PlotQA setup, you can:
 4. Get both original CSV and new JSON outputs
 5. Access visual element values with coordinate-based calculations
 
+## Troubleshooting
+
+### Common Issues
+
+1. **"No module named 'detectron2'"**
+   - Install Detectron2: `pip install --extra-index-url https://miropsota.github.io/torch_packages_builder detectron2==detectron2-0.6+18f6958pt2.8.0cu128`
+
+2. **"Model file not found" or "Could not load model"**
+   - Ensure `model_final.pkl` is in `models/ved/` directory
+   - Check file size: `ls -lh models/ved/model_final.pkl` (should be ~100MB+)
+   - Re-download from: https://drive.google.com/drive/folders/1P00jD-WFg_RBissIPmuWEWct3xoM3mgU?usp=sharing
+
+3. **"Tesseract not found"**
+   - Install Tesseract OCR and add to PATH
+   - Windows: Download from https://github.com/UB-Mannheim/tesseract/wiki
+
+4. **"CUDA out of memory"**
+   - Use CPU version: Install PyTorch without CUDA
+   - Reduce batch size in processing
+
+5. **KMP_DUPLICATE_LIB_OK error (Windows)**
+   ```bash
+   $env:KMP_DUPLICATE_LIB_OK="TRUE"
+   python process_chart.py --image chart.png --model models/ved/model_final.pkl --use-caffe2
+   ```
+
+6. **"No visual elements detected"**
+   - Check image quality and resolution
+   - Try different confidence thresholds: `--confidence 0.1` or `--confidence 0.05`
+   - Ensure image is a chart/graph (not a photo or other image type)
+
 ## Testing
 
 Test the pipeline with sample images:
@@ -637,6 +654,29 @@ $env:KMP_DUPLICATE_LIB_OK="TRUE"; python calculate_visual_values.py --image test
 $env:KMP_DUPLICATE_LIB_OK="TRUE"; python process_chart.py --image test_chart.png --model models/ved/model_final.pkl --confidence 0.05 --use-caffe2 --debug --verbose 
 
 ```
+
+## Quick Reference
+
+### Essential Commands
+```bash
+# Install dependencies
+pip install -r requirements.txt
+pip install --extra-index-url https://miropsota.github.io/torch_packages_builder detectron2==detectron2-0.6+18f6958pt2.8.0cu128
+
+# Basic processing
+python process_chart.py --image chart.png --model models/ved/model_final.pkl --use-caffe2
+
+# Visual values with debug
+python calculate_visual_values.py --image chart.png --model models/ved/model_final.pkl --use-caffe2 --debug
+
+# Windows KMP fix
+$env:KMP_DUPLICATE_LIB_OK="TRUE"; python process_chart.py --image chart.png --model models/ved/model_final.pkl --use-caffe2
+```
+
+### Download Links
+- **Model Weights**: https://drive.google.com/drive/folders/1P00jD-WFg_RBissIPmuWEWct3xoM3mgU?usp=sharing
+- **Dataset**: https://drive.google.com/drive/folders/15bWhzXxAN4WsXn4p37t_GYABb1F52nQw?usp=sharing
+- **Tesseract (Windows)**: https://github.com/UB-Mannheim/tesseract/wiki
 
 ## Acknowledgments
 
