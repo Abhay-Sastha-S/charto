@@ -422,36 +422,32 @@ python calculate_visual_values.py --image chart.png --model models/ved/model_fin
 
 ```
 charto/                                # Main project directory
-├── process_chart.py                   # Main chart processing script
-├── calculate_visual_values.py         # Visual values calculation script
+├── calculate_visual_values.py         # Main Visual values calculation script
+├── process_chart.py                   # Chart processing script
 ├── caffe2_compatible_detector.py      # Caffe2-compatible detector
 ├── exact_caffe2_detector.py           # Exact Caffe2 architecture replication
 ├── generate_detections.py             # Detectron2-based detection
-├── ocr_and_sie.py                    # OCR and structural extraction
-├── utils.py                          # Utility functions
-├── bbox_conversion.py                # Bounding box conversion utilities
-├── upscale_boxes.py                  # Box upscaling functionality
-├── requirements.txt                  # Complete dependencies list (latest versions)
-├── requirements-pinned.txt           # Exact versions from working environment
-├── setup.sh                          # Installation script
-├── README.md                         # This file
-├── models/                           # Trained model weights
+├── ocr_and_sie.py                     # OCR and structural extraction
+├── utils.py                           # Utility functions
+├── bbox_conversion.py                 # Bounding box conversion utilities
+├── upscale_boxes.py                   # Box upscaling functionality
+├── requirements.txt                   # Complete dependencies list (latest versions)
+├── README.md                          # This file
+├── calculate_visual_values_readme.md  # Detailed description of the working of the Main Script
+├── models/                            # Trained model weights
 │   └── ved/
-│       ├── model_final.pkl           # Caffe2 model file
-│       ├── model_iter19999.pkl       # Training checkpoint
-│       ├── net.pbtxt                 # Network architecture
-│       └── param_init_net.pbtxt      # Parameter initialization
-├── data/                             # PlotQA dataset
+│       ├── model_final.pkl            # Caffe2 model file
+│       ├── model_iter19999.pkl        # Training checkpoint
+│       ├── net.pbtxt                  # Network architecture
+│       └── param_init_net.pbtxt       # Parameter initialization
+├── data/                              # PlotQA dataset
 │   └── plotqa/
-│       ├── TRAIN/                    # Training images
-│       ├── VAL/                      # Validation images
-│       ├── TEST/                     # Test images
-│       └── annotations/              # COCO-style annotations
-├── bar_results/                      # Example results
-└── misc/                             # Additional utilities and documentation
-    ├── codes/                        # Legacy code files
-    ├── docs/                         # Documentation
-    └── dataset_catalog.py            # Dataset utilities
+│       ├── TRAIN/                     # Training images
+│       ├── VAL/                       # Validation images
+│       ├── TEST/                      # Test images
+│       └── annotations/               # COCO-style annotations
+└─── samle_results/                    # Example results
+
 ```
 
 ## API Reference
