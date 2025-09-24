@@ -107,7 +107,7 @@ python calculate_visual_values.py --image data/plotqa/VAL/png/18458.png --model 
 - `--image`: Path to input chart image (required)
 - `--model`: Path to trained VED model weights (required)
 - `--output`: Output directory (default: "results")
-- `--confidence`: Detection confidence threshold (default: 0.3)
+- `--confidence`: Detection confidence threshold (default: 0.05)
 - `--debug`: Enable debug mode for detailed analysis
 - `--verbose`: Enable verbose logging
 
@@ -245,7 +245,7 @@ For best compatibility with original PlotQA models, use `.pkl` files with Caffe2
 - `--image`: Path to input chart image (required)
 - `--model`: Path to trained VED model weights (required)
 - `--output`: Output directory (default: "results")
-- `--confidence`: Detection confidence threshold (default: 0.3)
+- `--confidence`: Detection confidence threshold (default: 0.05)
 - `--debug`: Enable debug mode for detailed analysis
 - `--verbose`: Enable verbose logging
 
@@ -489,7 +489,7 @@ from process_chart import PlotQAProcessor
 # Initialize with Caffe2-compatible detector
 processor = PlotQAProcessor(
     model_path="./models/ved/model_final.pkl",
-    confidence_threshold=0.3,
+    confidence_threshold=0.05,
     use_caffe2=True,
     use_exact_caffe2=True,
     debug=False
@@ -509,7 +509,7 @@ from calculate_visual_values import VisualValuesCalculator
 # Initialize calculator
 calculator = VisualValuesCalculator(
     model_path="./models/ved/model_final.pkl",
-    confidence_threshold=0.3,
+    confidence_threshold=0.05,
     use_caffe2=True,
     use_exact_caffe2=True,
     debug=True  # Enable for full visual value calculation
@@ -528,7 +528,7 @@ from caffe2_compatible_detector import Caffe2CompatibleDetector
 
 detector = Caffe2CompatibleDetector(
     model_path="./models/ved/model_final.pkl",
-    confidence_threshold=0.3
+    confidence_threshold=0.05
 )
 
 detections, resized_image, original_dimensions = detector.detect_single_image("chart.png")
@@ -543,7 +543,7 @@ from exact_caffe2_detector import ExactCaffe2Detector
 
 detector = ExactCaffe2Detector(
     model_path="./models/ved/model_final.pkl",
-    confidence_threshold=0.3
+    confidence_threshold=0.05
 )
 
 detections, resized_image, original_dimensions = detector.detect_single_image("chart.png")

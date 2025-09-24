@@ -1,8 +1,8 @@
 misc/
 __pycache__/
-bar_results/temp/debug_crops/
-dot_results/temp/debug_crops/
-line_results/temp/debug_crops/
+sample_results/bar/temp/debug_crops/
+sample_results/dot/temp/debug_crops/
+sample_results/line/temp/debug_crops/
 data/
 *.pkl
 *.pbtxt
