@@ -112,9 +112,21 @@ python calculate_visual_values.py --image data/plotqa/VAL/png/18458.png --model 
 - `--verbose`: Enable verbose logging
 
 **Detector Selection:**
+
+The pipeline supports three detector types with the following selection logic:
+
+- **If `use_caffe2=True` AND `use_exact_caffe2=True`** → **ExactCaffe2Detector** **{ THIS IS USED BY DEFAULT }**
+- **If `use_caffe2=True` AND `use_exact_caffe2=False`** → **Caffe2CompatibleDetector**  
+- **If `use_caffe2=False`** → **PlotQADetector** (Detectron2)
+
+**Default Behavior (when no flags are specified):**
+- `calculate_visual_values.py`: Uses **ExactCaffe2Detector** by default (`--use-caffe2` and `--use-exact-caffe2` are both `True` by default)
+- `process_chart.py`: Uses **ExactCaffe2Detector** by default (`--use-caffe2` and `--use-exact-caffe2` are both `True` by default)
+
+**Detector Options:**
 - `--use-caffe2`: Use Caffe2-compatible detector (recommended for original models)
 - `--use-exact-caffe2`: Use exact Caffe2 architecture replication (most compatible)
-- `--use-detectron2`: Use Detectron2 detector (modern PyTorch-based)
+- `--use-detectron2`: Use Detectron2 detector (modern PyTorch-based, overrides Caffe2 options)
 
 #### Output Files
 
