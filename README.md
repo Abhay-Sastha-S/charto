@@ -37,42 +37,7 @@ The pipeline consists of four main stages:
 4. **Visual Value Calculation**: Computes numerical values for visual elements using coordinate-based scaling
 
 ## Installation
-
-### Prerequisites
-- Python 3.8+ (tested with Python 3.12.11)
-- CUDA-compatible GPU (recommended for inference)
-- Tesseract OCR
-
-### Installation Options
-
-#### Option 1: Latest Versions (Recommended)
-```bash
-pip install -r requirements.txt
-pip install --extra-index-url https://miropsota.github.io/torch_packages_builder detectron2==detectron2-0.6+18f6958pt2.8.0cu128
-```
-
-#### Option 2: Exact Environment Replication
-```bash
-pip install -r requirements-pinned.txt
-pip install --extra-index-url https://miropsota.github.io/torch_packages_builder detectron2==detectron2-0.6+18f6958pt2.8.0cu128
-```
-
-### Download Required Files
-
-#### Model Weights (Required)
-Download from: https://drive.google.com/drive/folders/1P00jD-WFg_RBissIPmuWEWct3xoM3mgU?usp=sharing
-
-Required files:
-- `model_final.pkl` (~100MB+)
-- `net.pbtxt`
-- `param_init_net.pbtxt`
-
-Place in: `models/ved/`
-
-#### Dataset (Optional - for testing)
-Download from: https://drive.google.com/drive/folders/15bWhzXxAN4WsXn4p37t_GYABb1F52nQw?usp=sharing
-
-Place in: `data/plotqa/`
+Refer to Installation guide [here](INSTALL.md)
 
 ## Usage
 
