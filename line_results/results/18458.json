@@ -1,0 +1,85 @@
+{
+  "chart_type": "line",
+  "title": "Unemployed male youth population of a country",
+  "x_axis": {
+    "label": "Years",
+    "type": "categorical"
+  },
+  "y_axis": {
+    "label": "Unemployed males(% of male labor force ages 15-24)",
+    "type": "numeric"
+  },
+  "data_series": [
+    {
+      "name": "Trinidad and Tobago",
+      "type": "line",
+      "data": [
+        {
+          "x": "2009",
+          "y": 10.044052863436123
+        },
+        {
+          "x": "2010",
+          "y": 12.158590308370044
+        },
+        {
+          "x": "2008",
+          "y": 8.854625550660794
+        },
+        {
+          "x": "2005",
+          "y": 12.995594713656388
+        },
+        {
+          "x": "2007",
+          "y": 9.295154185022026
+        }
+      ]
+    },
+    {
+      "name": "Iran",
+      "type": "line",
+      "data": [
+        {
+          "x": "2010",
+          "y": 20.13215859030837
+        },
+        {
+          "x": "2007",
+          "y": 19.95594713656388
+        }
+      ]
+    },
+    {
+      "name": "Belgium",
+      "type": "line",
+      "data": [
+        {
+          "x": "2009",
+          "y": 21.54185022026432
+        },
+        {
+          "x": "2010",
+          "y": 22.334801762114537
+        },
+        {
+          "x": "2008",
+          "y": 18.41409691629956
+        },
+        {
+          "x": "2005",
+          "y": 21.497797356828197
+        },
+        {
+          "x": "2007",
+          "y": 17.312775330396477
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source_image": "data/plotqa/VAL/png/18458.png",
+    "extraction_method": "PlotQA Pipeline",
+    "total_series": 3
+  }
+}

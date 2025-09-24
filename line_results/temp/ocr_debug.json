@@ -1,0 +1,703 @@
+{
+  "chart_orientation": {
+    "isHbar": false,
+    "isSinglePlot": false
+  },
+  "ocr_results": [
+    {
+      "class": "legend_label",
+      "confidence": 0.999952,
+      "original_bbox_650": [
+        545.84,
+        10.01,
+        585.35,
+        28.33
+      ],
+      "extended_bbox_650": [
+        541.889,
+        8.177999999999999,
+        589.301,
+        30.162
+      ],
+      "original_bbox_upscaled": [
+        864.1067076923077,
+        10.78,
+        926.6540769230769,
+        30.509230769230765
+      ],
+      "extended_bbox_upscaled": [
+        857.8519707692308,
+        8.807076923076922,
+        932.9088138461539,
+        32.48215384615384
+      ],
+      "ocr_text": "Belgium",
+      "bbox_extension": {
+        "width_extension": 3.950999999999999,
+        "height_extension": 1.832,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 39.50999999999999,
+          "height": 18.32
+        }
+      }
+    },
+    {
+      "class": "ylabel",
+      "confidence": 0.999305,
+      "original_bbox_650": [
+        6.83,
+        112.42,
+        20.74,
+        524.28
+      ],
+      "extended_bbox_650": [
+        4.743500000000001,
+        50.64100000000001,
+        22.8265,
+        586.059
+      ],
+      "original_bbox_upscaled": [
+        10.812415384615385,
+        121.0676923076923,
+        32.83301538461538,
+        564.6092307692307
+      ],
+      "extended_bbox_upscaled": [
+        7.509325384615386,
+        54.53646153846155,
+        36.136105384615384,
+        631.1404615384615
+      ],
+      "ocr_text": "Unemployed males(% of male labor force ages 15-24) \u2014 roy BS",
+      "bbox_extension": {
+        "width_extension": 2.0864999999999996,
+        "height_extension": 61.77899999999999,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 13.909999999999998,
+          "height": 411.85999999999996
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.998094,
+      "original_bbox_650": [
+        19.21,
+        57.18,
+        28.17,
+        69.19
+      ],
+      "extended_bbox_650": [
+        16.522000000000002,
+        53.577,
+        30.858,
+        72.79299999999999
+      ],
+      "original_bbox_upscaled": [
+        30.410907692307692,
+        61.57846153846153,
+        44.59527692307692,
+        74.51230769230769
+      ],
+      "extended_bbox_upscaled": [
+        26.155596923076924,
+        57.69830769230769,
+        48.85058769230769,
+        78.39246153846153
+      ],
+      "ocr_text": "25.",
+      "bbox_extension": {
+        "width_extension": 2.688,
+        "height_extension": 3.6029999999999993,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 8.96,
+          "height": 12.009999999999998
+        }
+      }
+    },
+    {
+      "class": "legend_label",
+      "confidence": 0.996768,
+      "original_bbox_650": [
+        542.99,
+        54.53,
+        648.71,
+        71.46
+      ],
+      "extended_bbox_650": [
+        532.418,
+        52.837,
+        659.282,
+        73.15299999999999
+      ],
+      "original_bbox_upscaled": [
+        859.5949384615385,
+        58.72461538461538,
+        1026.957830769231,
+        76.95692307692306
+      ],
+      "extended_bbox_upscaled": [
+        842.8586492307692,
+        56.901384615384615,
+        1043.69412,
+        78.78015384615384
+      ],
+      "ocr_text": "\u2014 Trinidad and Tobago",
+      "bbox_extension": {
+        "width_extension": 10.572000000000003,
+        "height_extension": 1.6929999999999994,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 105.72000000000003,
+          "height": 16.929999999999993
+        }
+      }
+    },
+    {
+      "class": "title",
+      "confidence": 0.996561,
+      "original_bbox_650": [
+        32.67,
+        11.64,
+        334.44,
+        27.39
+      ],
+      "extended_bbox_650": [
+        2.493000000000002,
+        10.065000000000001,
+        364.617,
+        28.965
+      ],
+      "original_bbox_upscaled": [
+        51.719123076923076,
+        12.535384615384615,
+        529.4442461538462,
+        29.496923076923075
+      ],
+      "extended_bbox_upscaled": [
+        3.9466107692307726,
+        10.83923076923077,
+        577.2167584615385,
+        31.193076923076923
+      ],
+      "ocr_text": "Unemployed male youth population of a country",
+      "bbox_extension": {
+        "width_extension": 30.177,
+        "height_extension": 1.5750000000000002,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 301.77,
+          "height": 15.75
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.991721,
+      "original_bbox_650": [
+        385.69,
+        596.83,
+        396.46,
+        622.57
+      ],
+      "extended_bbox_650": [
+        382.459,
+        589.1080000000001,
+        399.691,
+        630.292
+      ],
+      "original_bbox_upscaled": [
+        610.5769384615385,
+        642.74,
+        627.6266769230768,
+        670.46
+      ],
+      "extended_bbox_upscaled": [
+        605.4620169230769,
+        634.4240000000001,
+        632.7415984615384,
+        678.776
+      ],
+      "ocr_text": "- 2009",
+      "bbox_extension": {
+        "width_extension": 3.2309999999999945,
+        "height_extension": 7.722000000000002,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.769999999999982,
+          "height": 25.74000000000001
+        }
+      }
+    },
+    {
+      "class": "xlabel",
+      "confidence": 0.990487,
+      "original_bbox_650": [
+        266.6,
+        632.68,
+        293.72,
+        647.23
+      ],
+      "extended_bbox_650": [
+        262.53200000000004,
+        630.4975,
+        297.788,
+        649.4125
+      ],
+      "original_bbox_upscaled": [
+        422.04830769230773,
+        681.3476923076922,
+        464.98135384615387,
+        697.016923076923
+      ],
+      "extended_bbox_upscaled": [
+        415.6083507692308,
+        678.9973076923076,
+        471.4213107692308,
+        699.3673076923077
+      ],
+      "ocr_text": "Years",
+      "bbox_extension": {
+        "width_extension": 4.0680000000000005,
+        "height_extension": 2.1825000000000103,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 27.120000000000005,
+          "height": 14.550000000000068
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.988685,
+      "original_bbox_650": [
+        496.78,
+        596.35,
+        507.24,
+        622.89
+      ],
+      "extended_bbox_650": [
+        493.64199999999994,
+        588.388,
+        510.37800000000004,
+        630.852
+      ],
+      "original_bbox_upscaled": [
+        786.4409538461538,
+        642.223076923077,
+        802.9999384615385,
+        670.8046153846153
+      ],
+      "extended_bbox_upscaled": [
+        781.4732584615383,
+        633.6486153846154,
+        807.967633846154,
+        679.3790769230768
+      ],
+      "ocr_text": "- 2010",
+      "bbox_extension": {
+        "width_extension": 3.138000000000011,
+        "height_extension": 7.961999999999989,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.460000000000036,
+          "height": 26.539999999999964
+        }
+      }
+    },
+    {
+      "class": "legend_label",
+      "confidence": 0.971937,
+      "original_bbox_650": [
+        546.36,
+        32.91,
+        567.19,
+        49.65
+      ],
+      "extended_bbox_650": [
+        544.277,
+        31.235999999999997,
+        569.273,
+        51.324
+      ],
+      "original_bbox_upscaled": [
+        864.9299076923077,
+        35.44153846153846,
+        897.9054000000001,
+        53.46923076923076
+      ],
+      "extended_bbox_upscaled": [
+        861.6323584615385,
+        33.63876923076923,
+        901.2029492307693,
+        55.272
+      ],
+      "ocr_text": "Tran",
+      "bbox_extension": {
+        "width_extension": 2.083000000000004,
+        "height_extension": 1.6740000000000004,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 20.83000000000004,
+          "height": 16.740000000000002
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.9591,
+      "original_bbox_650": [
+        19.46,
+        162.23,
+        27.98,
+        175.05
+      ],
+      "extended_bbox_650": [
+        16.904,
+        158.384,
+        30.536,
+        178.89600000000002
+      ],
+      "original_bbox_upscaled": [
+        30.806676923076925,
+        174.70923076923074,
+        44.29449230769231,
+        188.51538461538462
+      ],
+      "extended_bbox_upscaled": [
+        26.760332307692305,
+        170.56738461538458,
+        48.34083692307692,
+        192.65723076923078
+      ],
+      "ocr_text": "20.",
+      "bbox_extension": {
+        "width_extension": 2.5559999999999996,
+        "height_extension": 3.8460000000000063,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 8.52,
+          "height": 12.820000000000022
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.890113,
+      "original_bbox_650": [
+        274.92,
+        597.65,
+        285.07,
+        620.96
+      ],
+      "extended_bbox_650": [
+        271.875,
+        590.6569999999999,
+        288.115,
+        627.9530000000001
+      ],
+      "original_bbox_upscaled": [
+        435.21950769230773,
+        643.6230769230768,
+        451.2877384615384,
+        668.7261538461538
+      ],
+      "extended_bbox_upscaled": [
+        430.39903846153845,
+        636.0921538461538,
+        456.1082076923077,
+        676.257076923077
+      ],
+      "ocr_text": "- 2008",
+      "bbox_extension": {
+        "width_extension": 3.0449999999999933,
+        "height_extension": 6.993000000000017,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.149999999999977,
+          "height": 23.31000000000006
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.793868,
+      "original_bbox_650": [
+        22.58,
+        580.68,
+        30.02,
+        592.51
+      ],
+      "extended_bbox_650": [
+        20.348,
+        577.131,
+        32.252,
+        596.059
+      ],
+      "original_bbox_upscaled": [
+        35.74587692307692,
+        625.3476923076922,
+        47.52396923076923,
+        638.0876923076922
+      ],
+      "extended_bbox_upscaled": [
+        32.21244923076923,
+        621.5256923076922,
+        51.05739692307693,
+        641.9096923076922
+      ],
+      "ocr_text": "0-",
+      "bbox_extension": {
+        "width_extension": 2.232,
+        "height_extension": 3.5490000000000124,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 7.440000000000001,
+          "height": 11.830000000000041
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.624276,
+      "original_bbox_650": [
+        18.9,
+        266.58,
+        27.56,
+        278.47
+      ],
+      "extended_bbox_650": [
+        16.302,
+        263.013,
+        30.157999999999998,
+        282.03700000000003
+      ],
+      "original_bbox_upscaled": [
+        29.920153846153845,
+        287.0861538461538,
+        43.629599999999996,
+        299.89076923076925
+      ],
+      "extended_bbox_upscaled": [
+        25.807319999999997,
+        283.2447692307692,
+        47.742433846153844,
+        303.7321538461539
+      ],
+      "ocr_text": "",
+      "bbox_extension": {
+        "width_extension": 2.598,
+        "height_extension": 3.567000000000013,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 8.66,
+          "height": 11.890000000000043
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.530891,
+      "original_bbox_650": [
+        51.93,
+        595.78,
+        62.19,
+        623.18
+      ],
+      "extended_bbox_650": [
+        48.852000000000004,
+        587.56,
+        65.268,
+        631.4
+      ],
+      "original_bbox_upscaled": [
+        82.20918461538461,
+        641.6092307692307,
+        98.45155384615384,
+        671.116923076923
+      ],
+      "extended_bbox_upscaled": [
+        77.33647384615385,
+        632.756923076923,
+        103.32426461538462,
+        679.9692307692308
+      ],
+      "ocr_text": "- 2005",
+      "bbox_extension": {
+        "width_extension": 3.0779999999999994,
+        "height_extension": 8.219999999999994,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.259999999999998,
+          "height": 27.399999999999977
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.344238,
+      "original_bbox_650": [
+        163.73,
+        596.75,
+        174.61,
+        622.74
+      ],
+      "extended_bbox_650": [
+        160.46599999999998,
+        588.953,
+        177.87400000000002,
+        630.537
+      ],
+      "original_bbox_upscaled": [
+        259.1971846153846,
+        642.6538461538461,
+        276.4210615384616,
+        670.6430769230769
+      ],
+      "extended_bbox_upscaled": [
+        254.0300215384615,
+        634.2570769230769,
+        281.58822461538466,
+        679.0398461538462
+      ],
+      "ocr_text": "- 2007",
+      "bbox_extension": {
+        "width_extension": 3.264000000000007,
+        "height_extension": 7.797000000000002,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.880000000000024,
+          "height": 25.99000000000001
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.193235,
+      "original_bbox_650": [
+        20.13,
+        371.73,
+        27.2,
+        384.16
+      ],
+      "extended_bbox_650": [
+        18.009,
+        368.00100000000003,
+        29.320999999999998,
+        387.889
+      ],
+      "original_bbox_upscaled": [
+        31.86733846153846,
+        400.3246153846154,
+        43.05969230769231,
+        413.71076923076924
+      ],
+      "extended_bbox_upscaled": [
+        28.509632307692307,
+        396.30876923076926,
+        46.417398461538454,
+        417.7266153846154
+      ],
+      "ocr_text": "10",
+      "bbox_extension": {
+        "width_extension": 2.121,
+        "height_extension": 3.729000000000002,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 7.07,
+          "height": 12.430000000000007
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.186145,
+      "original_bbox_650": [
+        23.32,
+        476.11,
+        29.28,
+        488.76
+      ],
+      "extended_bbox_650": [
+        21.532,
+        472.315,
+        31.068,
+        492.555
+      ],
+      "original_bbox_upscaled": [
+        36.917353846153844,
+        512.7338461538461,
+        46.35249230769231,
+        526.3569230769231
+      ],
+      "extended_bbox_upscaled": [
+        34.086812307692306,
+        508.64692307692303,
+        49.18303384615385,
+        530.4438461538462
+      ],
+      "ocr_text": "5.",
+      "bbox_extension": {
+        "width_extension": 1.7880000000000003,
+        "height_extension": 3.794999999999993,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 5.960000000000001,
+          "height": 12.649999999999977
+        }
+      }
+    }
+  ],
+  "class_summary": {
+    "legend_label": {
+      "count": 3,
+      "texts": [
+        "Belgium",
+        "\u2014 Trinidad and Tobago",
+        "Tran"
+      ]
+    },
+    "ylabel": {
+      "count": 1,
+      "texts": [
+        "Unemployed males(% of male labor force ages 15-24) \u2014 roy BS"
+      ]
+    },
+    "yticklabel": {
+      "count": 6,
+      "texts": [
+        "25.",
+        "20.",
+        "0-",
+        "",
+        "10",
+        "5."
+      ]
+    },
+    "title": {
+      "count": 1,
+      "texts": [
+        "Unemployed male youth population of a country"
+      ]
+    },
+    "xticklabel": {
+      "count": 5,
+      "texts": [
+        "- 2009",
+        "- 2010",
+        "- 2008",
+        "- 2005",
+        "- 2007"
+      ]
+    },
+    "xlabel": {
+      "count": 1,
+      "texts": [
+        "Years"
+      ]
+    }
+  }
+}

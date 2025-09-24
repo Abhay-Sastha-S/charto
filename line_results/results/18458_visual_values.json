@@ -1,0 +1,111 @@
+{
+  "chart_type": "line",
+  "title": "Unemployed male youth population of a country",
+  "x_axis": {
+    "label": "Years",
+    "type": "categorical"
+  },
+  "y_axis": {
+    "label": "Unemployed males(% of male labor force ages 15-24)",
+    "type": "numeric"
+  },
+  "data_series": [
+    {
+      "name": "Years",
+      "type": "line",
+      "data": [
+        {
+          "x": "Years",
+          "y": 2009.0
+        },
+        {
+          "x": "Years",
+          "y": 2010.0
+        },
+        {
+          "x": "Years",
+          "y": 2008.0
+        },
+        {
+          "x": "Years",
+          "y": 2005.0
+        },
+        {
+          "x": "Years",
+          "y": 2007.0
+        }
+      ]
+    },
+    {
+      "name": "Trinidad and Tobago",
+      "type": "line",
+      "data": [
+        {
+          "x": "Years",
+          "y": 10.044052863436123
+        },
+        {
+          "x": "Years",
+          "y": 12.158590308370044
+        },
+        {
+          "x": "Years",
+          "y": 8.854625550660794
+        },
+        {
+          "x": "Years",
+          "y": 12.995594713656388
+        },
+        {
+          "x": "Years",
+          "y": 9.295154185022026
+        }
+      ]
+    },
+    {
+      "name": "Iran",
+      "type": "line",
+      "data": [
+        {
+          "x": "Years",
+          "y": 20.13215859030837
+        },
+        {
+          "x": "Years",
+          "y": 19.95594713656388
+        }
+      ]
+    },
+    {
+      "name": "Belgium",
+      "type": "line",
+      "data": [
+        {
+          "x": "Years",
+          "y": 21.54185022026432
+        },
+        {
+          "x": "Years",
+          "y": 22.334801762114537
+        },
+        {
+          "x": "Years",
+          "y": 18.41409691629956
+        },
+        {
+          "x": "Years",
+          "y": 21.497797356828197
+        },
+        {
+          "x": "Years",
+          "y": 17.312775330396477
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source_image": "data/plotqa/VAL/png/18458.png",
+    "extraction_method": "PlotQA Pipeline with Visual Values",
+    "total_series": 4
+  }
+}

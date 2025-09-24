@@ -1,0 +1,10 @@
+{
+  "image_path": "data/plotqa/VAL/png/18458.png",
+  "output_directory": "results_calc_fixed",
+  "files_created": [
+    "results_calc_fixed\\18458.csv",
+    "results_calc_fixed\\18458.json"
+  ],
+  "csv_file": "results_calc_fixed\\18458.csv",
+  "json_file": "results_calc_fixed\\18458.json"
+}

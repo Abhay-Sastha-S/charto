@@ -1,0 +1,742 @@
+{
+  "chart_orientation": {
+    "isHbar": false,
+    "isSinglePlot": false
+  },
+  "ocr_results": [
+    {
+      "class": "legend_label",
+      "confidence": 0.999961,
+      "original_bbox_650": [
+        584.07,
+        621.53,
+        644.1,
+        639.81
+      ],
+      "extended_bbox_650": [
+        578.067,
+        619.702,
+        650.1030000000001,
+        641.6379999999999
+      ],
+      "original_bbox_upscaled": [
+        805.1180307692308,
+        621.53,
+        887.8670769230769,
+        639.81
+      ],
+      "extended_bbox_upscaled": [
+        796.8431261538461,
+        619.702,
+        896.1419815384616,
+        641.6379999999999
+      ],
+      "ocr_text": "Netherlands",
+      "bbox_extension": {
+        "width_extension": 6.0029999999999974,
+        "height_extension": 1.8279999999999974,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 60.02999999999997,
+          "height": 18.279999999999973
+        }
+      }
+    },
+    {
+      "class": "legend_label",
+      "confidence": 0.999936,
+      "original_bbox_650": [
+        583.6,
+        598.61,
+        621.92,
+        615.95
+      ],
+      "extended_bbox_650": [
+        579.768,
+        596.876,
+        625.752,
+        617.6840000000001
+      ],
+      "original_bbox_upscaled": [
+        804.4701538461538,
+        598.61,
+        857.2927999999999,
+        615.95
+      ],
+      "extended_bbox_upscaled": [
+        799.1878892307692,
+        596.876,
+        862.5750646153845,
+        617.6840000000001
+      ],
+      "ocr_text": "Canada",
+      "bbox_extension": {
+        "width_extension": 3.8319999999999936,
+        "height_extension": 1.7340000000000033,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 38.319999999999936,
+          "height": 17.340000000000032
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.999932,
+      "original_bbox_650": [
+        264.51,
+        592.02,
+        275.63,
+        621.02
+      ],
+      "extended_bbox_650": [
+        261.174,
+        583.3199999999999,
+        278.966,
+        629.72
+      ],
+      "original_bbox_upscaled": [
+        364.61686153846154,
+        592.02,
+        379.9453538461538,
+        621.02
+      ],
+      "extended_bbox_upscaled": [
+        360.0183138461538,
+        583.3199999999999,
+        384.5439015384615,
+        629.72
+      ],
+      "ocr_text": "- 1994",
+      "bbox_extension": {
+        "width_extension": 3.336000000000001,
+        "height_extension": 8.7,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 11.120000000000005,
+          "height": 29.0
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.999897,
+      "original_bbox_650": [
+        531.99,
+        592.49,
+        543.05,
+        620.33
+      ],
+      "extended_bbox_650": [
+        528.672,
+        584.138,
+        546.3679999999999,
+        628.682
+      ],
+      "original_bbox_upscaled": [
+        733.3277538461539,
+        592.49,
+        748.5735384615384,
+        620.33
+      ],
+      "extended_bbox_upscaled": [
+        728.7540184615385,
+        584.138,
+        753.1472738461538,
+        628.682
+      ],
+      "ocr_text": "- 1997",
+      "bbox_extension": {
+        "width_extension": 3.3179999999999836,
+        "height_extension": 8.35200000000001,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 11.059999999999945,
+          "height": 27.840000000000032
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.999878,
+      "original_bbox_650": [
+        85.47,
+        591.42,
+        95.98,
+        620.87
+      ],
+      "extended_bbox_650": [
+        82.317,
+        582.5849999999999,
+        99.13300000000001,
+        629.705
+      ],
+      "original_bbox_upscaled": [
+        117.81710769230769,
+        591.42,
+        132.30473846153845,
+        620.87
+      ],
+      "extended_bbox_upscaled": [
+        113.47081846153844,
+        582.5849999999999,
+        136.6510276923077,
+        629.705
+      ],
+      "ocr_text": "- 1992",
+      "bbox_extension": {
+        "width_extension": 3.1530000000000014,
+        "height_extension": 8.835000000000013,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.510000000000005,
+          "height": 29.450000000000045
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.99986,
+      "original_bbox_650": [
+        353.86,
+        592.06,
+        364.24,
+        620.8
+      ],
+      "extended_bbox_650": [
+        350.74600000000004,
+        583.438,
+        367.354,
+        629.4219999999999
+      ],
+      "original_bbox_upscaled": [
+        487.7824,
+        592.06,
+        502.09083076923076,
+        620.8
+      ],
+      "extended_bbox_upscaled": [
+        483.4898707692308,
+        583.438,
+        506.38336,
+        629.4219999999999
+      ],
+      "ocr_text": "- 1995",
+      "bbox_extension": {
+        "width_extension": 3.1139999999999985,
+        "height_extension": 8.622000000000002,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.379999999999995,
+          "height": 28.74000000000001
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.999856,
+      "original_bbox_650": [
+        174.96,
+        592.08,
+        185.76,
+        620.64
+      ],
+      "extended_bbox_650": [
+        171.72000000000003,
+        583.5120000000001,
+        189.0,
+        629.208
+      ],
+      "original_bbox_upscaled": [
+        241.17563076923076,
+        592.08,
+        256.06301538461537,
+        620.64
+      ],
+      "extended_bbox_upscaled": [
+        236.70941538461543,
+        583.5120000000001,
+        260.52923076923076,
+        629.208
+      ],
+      "ocr_text": "- 1993",
+      "bbox_extension": {
+        "width_extension": 3.239999999999995,
+        "height_extension": 8.567999999999984,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 10.799999999999983,
+          "height": 28.559999999999945
+        }
+      }
+    },
+    {
+      "class": "ylabel",
+      "confidence": 0.999767,
+      "original_bbox_650": [
+        7.1,
+        215.05,
+        21.8,
+        405.86
+      ],
+      "extended_bbox_650": [
+        4.895,
+        186.4285,
+        24.005000000000003,
+        434.48150000000004
+      ],
+      "original_bbox_upscaled": [
+        9.787076923076922,
+        215.05,
+        30.050461538461537,
+        405.86
+      ],
+      "extended_bbox_upscaled": [
+        6.74756923076923,
+        186.4285,
+        33.089969230769235,
+        434.48150000000004
+      ],
+      "ocr_text": "Aid flow (current US$)",
+      "bbox_extension": {
+        "width_extension": 2.205,
+        "height_extension": 28.6215,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 14.700000000000001,
+          "height": 190.81
+        }
+      }
+    },
+    {
+      "class": "xticklabel",
+      "confidence": 0.99964,
+      "original_bbox_650": [
+        443.24,
+        592.93,
+        454.47,
+        622.33
+      ],
+      "extended_bbox_650": [
+        439.871,
+        584.1099999999999,
+        457.83900000000006,
+        631.1500000000001
+      ],
+      "original_bbox_upscaled": [
+        610.9892923076923,
+        592.93,
+        626.4694153846154,
+        622.33
+      ],
+      "extended_bbox_upscaled": [
+        606.3452553846154,
+        584.1099999999999,
+        631.1134523076923,
+        631.1500000000001
+      ],
+      "ocr_text": "- 1996",
+      "bbox_extension": {
+        "width_extension": 3.3690000000000055,
+        "height_extension": 8.820000000000027,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 11.230000000000018,
+          "height": 29.40000000000009
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.999585,
+      "original_bbox_650": [
+        25.47,
+        171.58,
+        59.19,
+        183.22
+      ],
+      "extended_bbox_650": [
+        15.354,
+        168.08800000000002,
+        69.306,
+        186.712
+      ],
+      "original_bbox_upscaled": [
+        35.10941538461538,
+        171.58,
+        81.59113846153845,
+        183.22
+      ],
+      "extended_bbox_upscaled": [
+        21.16489846153846,
+        168.08800000000002,
+        95.53565538461538,
+        186.712
+      ],
+      "ocr_text": "25000004",
+      "bbox_extension": {
+        "width_extension": 10.116,
+        "height_extension": 3.491999999999996,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 33.72,
+          "height": 11.639999999999986
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.999092,
+      "original_bbox_650": [
+        25.99,
+        414.24,
+        60.64,
+        426.26
+      ],
+      "extended_bbox_650": [
+        15.594999999999997,
+        410.634,
+        71.035,
+        429.866
+      ],
+      "original_bbox_upscaled": [
+        35.82621538461538,
+        414.24,
+        83.58990769230769,
+        426.26
+      ],
+      "extended_bbox_upscaled": [
+        21.497107692307686,
+        410.634,
+        97.91901538461538,
+        429.866
+      ],
+      "ocr_text": "10000005",
+      "bbox_extension": {
+        "width_extension": 10.395000000000001,
+        "height_extension": 3.6059999999999945,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 34.650000000000006,
+          "height": 12.019999999999982
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.998566,
+      "original_bbox_650": [
+        26.28,
+        334.38,
+        60.2,
+        345.61
+      ],
+      "extended_bbox_650": [
+        16.104,
+        331.01099999999997,
+        70.376,
+        348.97900000000004
+      ],
+      "original_bbox_upscaled": [
+        36.22596923076923,
+        334.38,
+        82.98338461538462,
+        345.61
+      ],
+      "extended_bbox_upscaled": [
+        22.198744615384612,
+        331.01099999999997,
+        97.01060923076923,
+        348.97900000000004
+      ],
+      "ocr_text": ".1500000-",
+      "bbox_extension": {
+        "width_extension": 10.176,
+        "height_extension": 3.3690000000000055,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 33.92,
+          "height": 11.230000000000018
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.998186,
+      "original_bbox_650": [
+        25.84,
+        252.6,
+        59.68,
+        264.31
+      ],
+      "extended_bbox_650": [
+        15.687999999999999,
+        249.087,
+        69.832,
+        267.823
+      ],
+      "original_bbox_upscaled": [
+        35.619446153846155,
+        252.6,
+        82.26658461538462,
+        264.31
+      ],
+      "extended_bbox_upscaled": [
+        21.625304615384614,
+        249.087,
+        96.26072615384614,
+        267.823
+      ],
+      "ocr_text": "2000000-",
+      "bbox_extension": {
+        "width_extension": 10.152000000000001,
+        "height_extension": 3.513000000000002,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 33.84,
+          "height": 11.710000000000008
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.996785,
+      "original_bbox_650": [
+        30.01,
+        495.19,
+        60.74,
+        507.17
+      ],
+      "extended_bbox_650": [
+        20.791000000000004,
+        491.596,
+        69.959,
+        510.764
+      ],
+      "original_bbox_upscaled": [
+        41.36763076923077,
+        495.19,
+        83.72775384615385,
+        507.17
+      ],
+      "extended_bbox_upscaled": [
+        28.65959384615385,
+        491.596,
+        96.43579076923076,
+        510.764
+      ],
+      "ocr_text": "",
+      "bbox_extension": {
+        "width_extension": 9.219,
+        "height_extension": 3.594000000000005,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 30.73,
+          "height": 11.980000000000018
+        }
+      }
+    },
+    {
+      "class": "title",
+      "confidence": 0.995775,
+      "original_bbox_650": [
+        59.07,
+        11.94,
+        650.0,
+        28.03
+      ],
+      "extended_bbox_650": [
+        0,
+        10.331,
+        709.093,
+        29.639000000000003
+      ],
+      "original_bbox_upscaled": [
+        81.42572307692308,
+        11.94,
+        896.0,
+        28.03
+      ],
+      "extended_bbox_upscaled": [
+        0.0,
+        10.331,
+        977.4574276923076,
+        29.639000000000003
+      ],
+      "ocr_text": "Net bilateral aid flow in Lebanon from different members of Development Assistance Committe",
+      "bbox_extension": {
+        "width_extension": 59.092999999999996,
+        "height_extension": 1.6090000000000004,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 590.93,
+          "height": 16.090000000000003
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.995162,
+      "original_bbox_650": [
+        54.42,
+        576.39,
+        61.93,
+        588.03
+      ],
+      "extended_bbox_650": [
+        52.167,
+        572.898,
+        64.18299999999999,
+        591.5219999999999
+      ],
+      "original_bbox_upscaled": [
+        75.01587692307692,
+        576.39,
+        85.36812307692307,
+        588.03
+      ],
+      "extended_bbox_upscaled": [
+        71.91020307692308,
+        572.898,
+        88.4737969230769,
+        591.5219999999999
+      ],
+      "ocr_text": "0-",
+      "bbox_extension": {
+        "width_extension": 2.2529999999999992,
+        "height_extension": 3.491999999999996,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 7.509999999999998,
+          "height": 11.639999999999986
+        }
+      }
+    },
+    {
+      "class": "xlabel",
+      "confidence": 0.988055,
+      "original_bbox_650": [
+        301.81,
+        630.38,
+        327.95,
+        646.07
+      ],
+      "extended_bbox_650": [
+        297.889,
+        628.0264999999999,
+        331.871,
+        648.4235000000001
+      ],
+      "original_bbox_upscaled": [
+        416.03347692307693,
+        630.38,
+        452.0664615384615,
+        646.07
+      ],
+      "extended_bbox_upscaled": [
+        410.62852923076923,
+        628.0264999999999,
+        457.4714092307692,
+        648.4235000000001
+      ],
+      "ocr_text": "Year",
+      "bbox_extension": {
+        "width_extension": 3.9209999999999976,
+        "height_extension": 2.353500000000008,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 26.139999999999986,
+          "height": 15.690000000000055
+        }
+      }
+    },
+    {
+      "class": "yticklabel",
+      "confidence": 0.961985,
+      "original_bbox_650": [
+        24.3,
+        90.84,
+        60.12,
+        101.8
+      ],
+      "extended_bbox_650": [
+        13.554000000000004,
+        87.552,
+        70.866,
+        105.088
+      ],
+      "original_bbox_upscaled": [
+        33.49661538461538,
+        90.84,
+        82.87310769230768,
+        101.8
+      ],
+      "extended_bbox_upscaled": [
+        18.683667692307697,
+        87.552,
+        97.68605538461539,
+        105.088
+      ],
+      "ocr_text": "3000000",
+      "bbox_extension": {
+        "width_extension": 10.745999999999997,
+        "height_extension": 3.287999999999998,
+        "extension_type": "percentage_based_adaptive",
+        "original_bbox_size": {
+          "width": 35.81999999999999,
+          "height": 10.959999999999994
+        }
+      }
+    }
+  ],
+  "class_summary": {
+    "legend_label": {
+      "count": 2,
+      "texts": [
+        "Netherlands",
+        "Canada"
+      ]
+    },
+    "xticklabel": {
+      "count": 6,
+      "texts": [
+        "- 1994",
+        "- 1997",
+        "- 1992",
+        "- 1995",
+        "- 1993",
+        "- 1996"
+      ]
+    },
+    "ylabel": {
+      "count": 1,
+      "texts": [
+        "Aid flow (current US$)"
+      ]
+    },
+    "yticklabel": {
+      "count": 7,
+      "texts": [
+        "25000004",
+        "10000005",
+        ".1500000-",
+        "2000000-",
+        "",
+        "0-",
+        "3000000"
+      ]
+    },
+    "title": {
+      "count": 1,
+      "texts": [
+        "Net bilateral aid flow in Lebanon from different members of Development Assistance Committe"
+      ]
+    },
+    "xlabel": {
+      "count": 1,
+      "texts": [
+        "Year"
+      ]
+    }
+  }
+}

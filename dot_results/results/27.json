@@ -1,0 +1,71 @@
+{
+  "chart_type": "line",
+  "title": "Net bilateral aid flow in Lebanon from different members of Development Assistance Committe4",
+  "x_axis": {
+    "label": "Year",
+    "type": "categorical"
+  },
+  "y_axis": {
+    "label": "Aid flow (current US$)",
+    "type": "numeric"
+  },
+  "data_series": [
+    {
+      "name": "Netherlands",
+      "type": "line",
+      "data": [
+        {
+          "x": "1994",
+          "y": 1231481.4814814816
+        },
+        {
+          "x": "1997",
+          "y": 842592.5925925926
+        },
+        {
+          "x": "1992",
+          "y": 2108024.6913580247
+        },
+        {
+          "x": "1995",
+          "y": 783950.6172839507
+        },
+        {
+          "x": "1993",
+          "y": 1564814.8148148148
+        },
+        {
+          "x": "1996",
+          "y": 503086.41975308646
+        }
+      ]
+    },
+    {
+      "name": "Canada",
+      "type": "line",
+      "data": [
+        {
+          "x": "1994",
+          "y": 1663580.2469135802
+        },
+        {
+          "x": "1997",
+          "y": 2320987.654320988
+        },
+        {
+          "x": "1992",
+          "y": 972222.2222222222
+        },
+        {
+          "x": "1993",
+          "y": 484567.9012345679
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "source_image": "data/plotqa/VAL/png/27.png",
+    "extraction_method": "PlotQA Pipeline",
+    "total_series": 2
+  }
+}

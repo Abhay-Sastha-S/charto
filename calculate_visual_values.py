@@ -30,6 +30,10 @@ from process_chart import PlotQAProcessor
 # Import local utilities
 from utils import find_center, find_Distance, list_subtraction, find_slope
 
+# Import the exact pipeline from process_chart.py
+from ocr_and_sie import run_original_plotqa_pipeline
+import shutil
+
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -86,9 +90,116 @@ class VisualValuesCalculator:
             
         return results
     
+    def _run_ved_detection(self, image_path, detections_dir, image_name):
+        """Run VED detection using the exact method from process_chart.py"""
+        logger.info("Running VED detection...")
+        
+        # Use the detector from the processor
+        detections, resized_image, original_dimensions = self.processor.detector.detect_single_image(image_path)
+        
+        # Save detections in the format expected by the pipeline
+        detections_path = os.path.join(detections_dir, f"{image_name}.txt")
+        with open(detections_path, 'w') as f:
+            for detection in detections:
+                class_name = detection[0]
+                confidence = detection[1]
+                xmin, ymin, xmax, ymax = detection[2:6]
+                f.write(f"{class_name} {confidence:.6f} {xmin:.6f} {ymin:.6f} {xmax:.6f} {ymax:.6f}\n")
+        
+        # Convert resized image to PIL format
+        if isinstance(resized_image, np.ndarray):
+            resized_image = Image.fromarray(cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB))
+        
+        return detections_path, resized_image, original_dimensions
+    
+    def _run_ocr_sie_pipeline(self, png_dir, detections_dir, csv_dir, resized_image, original_dimensions):
+        """Run OCR and SIE using the exact method from process_chart.py"""
+        logger.info("Running OCR and SIE pipeline...")
+        
+        # Use the original PlotQA pipeline with lower threshold for tick labels
+        run_original_plotqa_pipeline(
+            png_dir=png_dir,
+            detections_dir=detections_dir,
+            csv_dir=csv_dir,
+            MIN_CLASS_CONFIDENCE=self.processor.confidence_threshold,
+            MIN_TICKLABEL_CONFIDENCE=0.05,  # Lower threshold for tick labels
+            debug=self.debug  # Pass debug flag to OCR pipeline
+        )
+        
+        logger.info("OCR and SIE completed")
+    
+    def _csv_to_json_with_visual_values(self, csv_path, json_path, image_path, png_dir, detections_dir):
+        """Convert CSV to JSON with visual values using the exact method from process_chart.py"""
+        logger.info("Converting CSV to JSON with visual values...")
+        
+        # Load the CSV data
+        import pandas as pd
+        df = pd.read_csv(csv_path)
+        
+        # Extract metadata
+        metadata_cols = ['xlabel', 'ylabel', 'title', 'legend orientation', 'plot_type']
+        data_cols = [col for col in df.columns if col not in metadata_cols]
+        
+        # Determine chart type
+        if 'plot_type' in df.columns and not df.empty:
+            chart_type = df['plot_type'].iloc[0]
+        else:
+            # Use heuristic detection
+            if any("bar" in str(col).lower() for col in df.columns):
+                chart_type = "bar"
+            elif any("line" in str(col).lower() for col in df.columns):
+                chart_type = "line"
+            else:
+                chart_type = "line"  # Default for scatter plots
+        
+        # Extract data series
+        data_series = []
+        for col in data_cols:
+            if col in df.columns:
+                series_data = []
+                for _, row in df.iterrows():
+                    if pd.notna(row[col]) and row[col] != '':
+                        series_data.append({
+                            "x": str(row.get('xlabel', '')),
+                            "y": float(row[col]) if isinstance(row[col], (int, float)) else row[col]
+                        })
+                
+                if series_data:
+                    data_series.append({
+                        "name": col,
+                        "type": chart_type,
+                        "data": series_data
+                    })
+        
+        # Create the JSON structure
+        result = {
+            "chart_type": chart_type,
+            "title": df['title'].iloc[0] if 'title' in df.columns and not df.empty else "",
+            "x_axis": {
+                "label": df['xlabel'].iloc[0] if 'xlabel' in df.columns and not df.empty else "",
+                "type": "categorical"
+            },
+            "y_axis": {
+                "label": df['ylabel'].iloc[0] if 'ylabel' in df.columns and not df.empty else "",
+                "type": "numeric"
+            },
+            "data_series": data_series,
+            "metadata": {
+                "source_image": str(image_path),
+                "extraction_method": "PlotQA Pipeline with Visual Values",
+                "total_series": len(data_series)
+            }
+        }
+        
+        # Save the JSON
+        with open(json_path, 'w') as f:
+            json.dump(result, f, indent=2)
+        
+        logger.info(f"JSON with visual values saved to: {json_path}")
+    
     def _calculate_visual_values(self, image_path, json_path, output_dir):
         """
-        Calculate visual values for detected elements using find_visual_values logic
+        Calculate visual values using the exact method from process_chart.py
         
         Args:
             image_path: Original image path
@@ -98,35 +209,56 @@ class VisualValuesCalculator:
         Returns:
             Dictionary with enhanced results including visual values
         """
-        logger.info("Calculating visual values for detected elements...")
+        logger.info("Calculating visual values using exact process_chart.py method...")
         
         try:
-            # Load the detection results
-            with open(json_path, 'r') as f:
-                chart_data = json.load(f)
+            # Use the exact method from process_chart.py by running the full pipeline
+            # This ensures proper handling of scatter plots and dot_line elements
             
-            # Check if we have valid data
-            if 'error' in chart_data:
-                logger.warning("No valid chart data found for visual value calculation")
-                return {"visual_values_error": "No valid chart data"}
-            
-            # Load the original image for processing
-            image = Image.open(image_path)
-            
-            # Get detection data from temp files if in debug mode
-            if self.debug and hasattr(self.processor, 'temp_dir'):
-                detection_file = os.path.join(self.processor.temp_dir, "detection_summary.json")
-                ocr_file = os.path.join(self.processor.temp_dir, "ocr_debug.json")
+            # Create temporary directories for the pipeline
+            import tempfile
+            with tempfile.TemporaryDirectory() as temp_dir:
+                png_dir = os.path.join(temp_dir, "png")
+                detections_dir = os.path.join(temp_dir, "detections")
+                csv_dir = os.path.join(temp_dir, "csv")
                 
-                if os.path.exists(detection_file) and os.path.exists(ocr_file):
-                    return self._calculate_from_debug_data(image, detection_file, ocr_file, output_dir)
-            
-            # If no debug data, try to reconstruct from CSV/JSON results
-            return self._calculate_from_chart_data(image, chart_data, output_dir)
-            
+                os.makedirs(png_dir, exist_ok=True)
+                os.makedirs(detections_dir, exist_ok=True)
+                os.makedirs(csv_dir, exist_ok=True)
+                
+                # Copy image to png_dir
+                image_name = Path(image_path).stem
+                temp_image_path = os.path.join(png_dir, f"{image_name}.png")
+                shutil.copy2(image_path, temp_image_path)
+                
+                # Run VED detection
+                detections_path, resized_image, original_dimensions = self._run_ved_detection(image_path, detections_dir, image_name)
+                
+                # Run the exact OCR/SIE pipeline from process_chart.py
+                self._run_ocr_sie_pipeline(png_dir, detections_dir, csv_dir, resized_image, original_dimensions)
+                
+                # Load the results
+                csv_path = os.path.join(csv_dir, f"{image_name}.csv")
+                if os.path.exists(csv_path):
+                    # Convert CSV to JSON with visual values
+                    json_output = os.path.join(output_dir, f"{image_name}_visual_values.json")
+                    self._csv_to_json_with_visual_values(csv_path, json_output, image_path, png_dir, detections_dir)
+                    
+                    logger.info(f"Visual values saved to: {json_output}")
+                    
+                    return {
+                        "visual_values_file": json_output,
+                        "calculation_method": "process_chart_pipeline"
+                    }
+                else:
+                    raise Exception("No CSV output generated from pipeline")
+                    
         except Exception as e:
             logger.error(f"Error calculating visual values: {e}")
-            return {"visual_values_error": str(e)}
+            return {
+                "error": f"Visual value calculation failed: {str(e)}",
+                "calculation_method": "failed"
+            }
     
     def _calculate_from_debug_data(self, image, detection_file, ocr_file, output_dir):
         """Calculate values using debug detection and OCR data"""
