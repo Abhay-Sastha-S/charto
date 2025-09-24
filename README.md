@@ -11,7 +11,7 @@ pip install --extra-index-url https://miropsota.github.io/torch_packages_builder
 
 # Download model weights (see Installation section)
 # Then run:
-python process_chart.py --image your_chart.png --model models/ved/model_final.pkl --use-caffe2 --confidence 0.05
+python calculate_visual_values.py --image your_chart.png --model models/ved/model_final.pkl --confidence 0.05 --use-caffe2 --debug
 ```
 
 ## Overview
